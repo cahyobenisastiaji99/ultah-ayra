@@ -798,8 +798,64 @@
     @keyframes confettiDrop {
       0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 1; }
       100% { transform: translate3d(var(--x, 0px), 100vh, 0) rotate(540deg); opacity: 0; }
-    }
-  </style>
+    } /* Efek goyang manja biar pilihan tebak-tebakan, bunga, & amplop langsung kelihatan */
+@keyframes goyangBiarKelihatan {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  20% {
+    transform: rotate(-3deg) scale(1.03);
+  }
+  40% {
+    transform: rotate(3deg) scale(1.04);
+  }
+  60% {
+    transform: rotate(-2deg) scale(1.02);
+  }
+  80% {
+    transform: rotate(2deg) scale(1.02);
+  }
+}
+
+button,
+[role="button"],
+.btn,
+.option,
+.choice,
+.answer,
+.envelope,
+.amplop,
+.flower,
+.bunga {
+  font-size: clamp(1.1rem, 4.2vw, 1.4rem);
+  font-weight: 800;
+  animation: goyangBiarKelihatan 2.4s ease-in-out infinite;
+}
+
+button:hover,
+button:active,
+[role="button"]:hover,
+[role="button"]:active,
+.btn:hover,
+.btn:active,
+.option:hover,
+.option:active,
+.choice:hover,
+.choice:active,
+.answer:hover,
+.answer:active,
+.envelope:hover,
+.envelope:active,
+.amplop:hover,
+.amplop:active,
+.flower:hover,
+.flower:active,
+.bunga:hover,
+.bunga:active {
+  animation: none;
+  transform: scale(1.05);
+}
+ </style>
 </head>
 <body>
   <div class="petals-layer" id="petalsLayer" aria-hidden="true"></div>
