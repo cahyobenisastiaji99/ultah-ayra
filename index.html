@@ -1,6 +1,1449 @@
-<html>
-<style>
-   div{min-height:1em;}
-</style>
-<body>&lt;!DOCTYPE html&gt;<br/>&lt;html lang=&quot;id&quot;&gt;<br/>&lt;head&gt;<br/>  &lt;meta charset=&quot;UTF-8&quot; /&gt;<br/>  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;<br/>  &lt;title&gt;Selamat Ulang Tahun, Ayra&lt;/title&gt;<br/>  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;<br/>  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;<br/>  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;<br/>  &lt;style&gt;<br/>    :root {<br/>      --bg-top: #fdf2f8;<br/>      --bg-mid: #f3e8ff;<br/>      --bg-bot: #fce7f3;<br/>      --card-bg: rgba(255, 255, 255, 0.86);<br/>      --text-main: #47293d;<br/>      --text-soft: #78526b;<br/>      --pink-deep: #ec4899;<br/>      --lilac-deep: #a855f7;<br/>      --border-soft: rgba(216, 180, 254, 0.6);<br/>      --shadow-soft: 0 20px 44px -16px rgba(139, 92, 246, 0.22);<br/>    }<br/><br/>    * {<br/>      box-sizing: border-box;<br/>      margin: 0;<br/>      padding: 0;<br/>      -webkit-tap-highlight-color: transparent;<br/>    }<br/><br/>    body {<br/>      min-height: 100dvh;<br/>      font-family: &#39;Plus Jakarta Sans&#39;, sans-serif;<br/>      color: var(--text-main);<br/>      background:<br/>        radial-gradient(circle at 15% 12%, rgba(244, 114, 182, 0.24), transparent 45%),<br/>        radial-gradient(circle at 85% 22%, rgba(192, 132, 252, 0.28), transparent 48%),<br/>        linear-gradient(165deg, var(--bg-top) 0%, var(--bg-mid) 52%, var(--bg-bot) 100%);<br/>      overflow-x: hidden;<br/>      position: relative;<br/>      display: flex;<br/>      align-items: center;<br/>      justify-content: center;<br/>      padding: 20px 16px;<br/>    }<br/><br/>    /* Kelopak bunga jatuh */<br/>    .petals-layer {<br/>      position: fixed;<br/>      inset: 0;<br/>      pointer-events: none;<br/>      overflow: hidden;<br/>      z-index: 1;<br/>    }<br/><br/>    .petal {<br/>      position: absolute;<br/>      top: -40px;<br/>      width: 14px;<br/>      height: 18px;<br/>      border-radius: 75% 15% 75% 15%;<br/>      opacity: 0.72;<br/>      animation: fall linear infinite;<br/>    }<br/><br/>    @keyframes fall {<br/>      0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }<br/>      12% { opacity: 0.72; }<br/>      88% { opacity: 0.72; }<br/>      100% { transform: translate3d(var(--drift, 35px), 105vh, 0) rotate(320deg); opacity: 0; }<br/>    }<br/><br/>    /* Layer kembang api */<br/>    .fireworks-layer {<br/>      position: fixed;<br/>      inset: 0;<br/>      pointer-events: none;<br/>      overflow: hidden;<br/>      z-index: 25;<br/>    }<br/><br/>    .spark {<br/>      position: absolute;<br/>      width: 7px;<br/>      height: 7px;<br/>      border-radius: 50%;<br/>      box-shadow: 0 0 10px currentColor;<br/>      animation: burst 1.15s cubic-bezier(0.16, 0.88, 0.32, 1) forwards;<br/>    }<br/><br/>    @keyframes burst {<br/>      0% { transform: translate(0, 0) scale(1.15); opacity: 1; }<br/>      75% { opacity: 0.95; }<br/>      100% { transform: translate(var(--tx, 60px), var(--ty, -60px)) scale(0.2); opacity: 0; }<br/>    }<br/><br/>    /* Layar Awalan (Splash / Intro Gate) */<br/>    .intro-gate {<br/>      position: fixed;<br/>      inset: 0;<br/>      z-index: 35;<br/>      display: flex;<br/>      align-items: center;<br/>      justify-content: center;<br/>      padding: 20px;<br/>      background:<br/>        radial-gradient(circle at 22% 20%, rgba(244, 114, 182, 0.3), transparent 50%),<br/>        radial-gradient(circle at 80% 78%, rgba(192, 132, 252, 0.34), transparent 52%),<br/>        linear-gradient(160deg, #fdf2f8 0%, #f3e8ff 55%, #fce7f3 100%);<br/>      transition: opacity 0.45s ease, transform 0.45s ease;<br/>    }<br/><br/>    .intro-gate.fade-out {<br/>      opacity: 0;<br/>      transform: scale(1.03);<br/>      pointer-events: none;<br/>    }<br/><br/>    .intro-box {<br/>      width: 100%;<br/>      max-width: 390px;<br/>      text-align: center;<br/>      background: rgba(255, 255, 255, 0.88);<br/>      backdrop-filter: blur(16px);<br/>      border: 1px solid rgba(216, 180, 254, 0.65);<br/>      border-radius: 28px;<br/>      padding: 30px 22px;<br/>      box-shadow: 0 22px 48px -16px rgba(139, 92, 246, 0.26);<br/>    }<br/><br/>    .intro-salam {<br/>      font-family: &#39;Cormorant Garamond&#39;, serif;<br/>      font-style: italic;<br/>      font-size: 1.2rem;<br/>      font-weight: 600;<br/>      color: #7e2f68;<br/>      margin-bottom: 10px;<br/>    }<br/><br/>    .intro-kicker {<br/>      font-size: 0.72rem;<br/>      letter-spacing: 0.14em;<br/>      text-transform: uppercase;<br/>      color: #8f4779;<br/>      margin-bottom: 10px;<br/>      font-weight: 600;<br/>    }<br/><br/>    .intro-title {<br/>      font-family: &#39;Cormorant Garamond&#39;, serif;<br/>      font-size: 2.15rem;<br/>      line-height: 1.1;<br/>      color: #3d1f35;<br/>      margin-bottom: 6px;<br/>    }<br/><br/>    .intro-sub {<br/>      font-family: &#39;Cormorant Garamond&#39;, serif;<br/>      font-style: italic;<br/>      font-size: 1.18rem;<br/>      color: #8e3b76;<br/>      margin-bottom: 14px;<br/>    }<br/><br/>    .intro-desc {<br/>      font-size: 0.88rem;<br/>      line-height: 1.62;<br/>      color: var(--text-soft);<br/>      margin-bottom: 20px;<br/>    }<br/><br/>    .preparing-state {<br/>      display: none;<br/>      flex-direction: column;<br/>      align-items: center;<br/>      gap: 12px;<br/>      padding: 12px 0 4px;<br/>    }<br/><br/>    .preparing-state.active {<br/>      display: flex;<br/>    }<br/><br/>    .ring-loader {<br/>      width: 56px;<br/>      height: 56px;<br/>      border-radius: 50%;<br/>      border: 3px solid rgba(216, 180, 254, 0.45);<br/>      border-top-color: var(--pink-deep);<br/>      border-right-color: var(--lilac-deep);<br/>      display: flex;<br/>      align-items: center;<br/>      justify-content: center;<br/>      font-family: &#39;Cormorant Garamond&#39;, serif;<br/>      font-size: 1.35rem;<br/>      font-weight: 600;<br/>      color: #6b2859;<br/>      animation: spinRing 1s linear infinite;<br/>    }<br/><br/>    @keyframes spinRing {<br/>      to { transform: rotate(360deg); }<br/>    }<br/><br/>    .preparing-text {<br/>      font-size: 0.78rem;<br/>      letter-spacing: 0.1em;<br/>      text-transform: uppercase;<br/>      color: #7d3e6b;<br/>      font-weight: 600;<br/>    }<br/><br/>    .shell {<br/>      position: relative;<br/>      z-index: 2;<br/>      width: 100%;<br/>      max-width: 440px;<br/>    }<br/><br/>    /* Indikator 10 sesi */<br/>    .step-bar {<br/>      display: flex;<br/>      align-items: center;<br/>      justify-content: space-between;<br/>      gap: 8px;<br/>      margin-bottom: 12px;<br/>      padding: 0 4px;<br/>    }<br/><br/>    .step-dots {<br/>      display: flex;<br/>      gap: 3px;<br/>      align-items: center;<br/>      flex-wrap: nowrap;<br/>    }<br/><br/>    .step-dot {<br/>      width: 8px;<br/>      height: 6px;<br/>      border-radius: 999px;<br/>      background: rgba(168, 85, 247, 0.22);<br/>      transition: width 0.25s ease, background 0.25s ease;<br/>    }<br/><br/>    .step-dot.active {<br/>      width: 18px;<br/>      background: linear-gradient(90deg, var(--pink-deep), var(--lilac-deep));<br/>    }<br/><br/>    .step-label {<br/>      font-size: 0.74rem;<br/>      font-weight: 600;<br/>      color: #7d3e6b;<br/>      white-space: nowrap;<br/>    }<br/><br/>    .card {<br/>      background: var(--card-bg);<br/>      backdrop-filter: blur(16px);<br/>      -webkit-backdrop-filter: blur(16px);<br/>      border: 1px solid var(--border-soft);<br/>      border-radius: 28px;<br/>      padding: 24px 20px;<br/>      box-shadow: var(--shadow-soft);<br/>    }<br/><br/>    .page {<br/>      display: none;<br/>      animation: pageIn 0.34s ease;<br/>    }<br/><br/>    .page.active {<br/>      display: block;<br/>    }<br/><br/>    @keyframes pageIn {<br/>      from { opacity: 0; transform: translateY(10px); }<br/>      to { opacity: 1; transform: translateY(0); }<br/>    }<br/><br/>    .tag {<br/>      display: inline-flex;<br/>      align-items: center;<br/>      gap: 6px;<br/>      font-size: 12px;<br/>      font-weight: 600;<br/>      color: #8b3a72;<br/>      background: rgba(255, 255, 255, 0.85);<br/>      border: 1px solid rgba(236, 72, 153, 0.24);<br/>      padding: 6px 12px;<br/>      border-radius: 999px;<br/>      margin-bottom: 12px;<br/>    }<br/><br/>    h1, .page-title {<br/>      font-family: &#39;Cormorant Garamond&#39;, serif;<br/>      font-size: clamp(1.86rem, 7.4vw, 2.3rem);<br/>      line-height: 1.1;<br/>      font-weight: 600;<br/>      color: #3d1f35;<br/>      margin-bottom: 8px;<br/>    }<br/><br/>    .full-name {<br/>      font-family: &#39;Cormorant Garamond&#39;, serif;<br/>      font-style: italic;<br/>      font-size: 1.1rem;<br/>      color: #8e3b76;<br/>      margin-bottom: 12px;<br/>      line-height: 1.3;<br/>    }<br/><br/>    .lead, .page-desc {<br/>      font-size: 0.9rem;<br/>      line-height: 1.65;<br/>      color: var(--text-soft);<br/>    }<br/><br/>    .btn-spark {<br/>      margin-top: 14px;<br/>      width: 100%;<br/>      border: 1.5px solid rgba(236, 72, 153, 0.42);<br/>      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(253, 242, 248, 0.92));<br/>      color: #852b69;<br/>      font-family: inherit;<br/>      font-size: 0.85rem;<br/>      font-weight: 600;<br/>      padding: 10px 14px;<br/>      border-radius: 15px;<br/>      cursor: pointer;<br/>    }<br/><br/>    .floral-divider {<br/>      display: flex;<br/>      align-items: center;<br/>      justify-content: center;<br/>      gap: 10px;<br/>      margin: 16px 0;<br/>      color: #b05c98;<br/>      font-size: 13px;<br/>    }<br/><br/>    .floral-divider::before,<br/>    .floral-divider::after {<br/>      content: &quot;&quot;;<br/>      height: 1px;<br/>      flex: 1;<br/>      background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.35), transparent);<br/>    }<br/><br/>    .affection-note {<br/>      padding: 14px 15px;<br/>      border-radius: 18px;<br/>      background: linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(253, 242, 248, 0.82));<br/>      border: 1px solid rgba(216, 180, 254, 0.45);<br/>      font-size: 0.88rem;<br/>      line-height: 1.62;<br/>      color: #5b2b4d;<br/>    }<br/><br/>    /* Petik Bunga */<br/>    .garden-row {<br/>      display: grid;<br/>      grid-template-columns: repeat(4, 1fr);<br/>      gap: 10px;<br/>      margin: 16px 0 14px;<br/>    }<br/><br/>    .flower-btn {<br/>      aspect-ratio: 1 / 1;<br/>      border-radius: 20px;<br/>      border: 1.5px solid rgba(216, 180, 254, 0.58);<br/>      background: rgba(255, 255, 255, 0.78);<br/>      cursor: pointer;<br/>      display: flex;<br/>      flex-direction: column;<br/>      align-items: center;<br/>      justify-content: center;<br/>      gap: 4px;<br/>      transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease;<br/>    }<br/><br/>    .flower-btn:active { transform: scale(0.94); }<br/>    .flower-btn.picked {<br/>      background: linear-gradient(155deg, rgba(251, 207, 232, 0.82), rgba(233, 213, 255, 0.88));<br/>      border-color: rgba(236, 72, 153, 0.55);<br/>      transform: translateY(-2px);<br/>    }<br/><br/>    .flower-icon { font-size: 1.5rem; line-height: 1; }<br/>    .flower-label { font-size: 0.68rem; font-weight: 600; color: #7c3a69; }<br/><br/>    .soft-bubble {<br/>      min-height: 62px;<br/>      padding: 13px 15px;<br/>      border-radius: 18px;<br/>      background: rgba(255, 255, 255, 0.78);<br/>      border: 1px dashed rgba(168, 85, 247, 0.38);<br/>      font-size: 0.87rem;<br/>      line-height: 1.56;<br/>      color: #552848;<br/>      display: flex;<br/>      align-items: center;<br/>    }<br/><br/>    /* Pilih Bunga Favorit */<br/>    .fav-grid {<br/>      display: grid;<br/>      grid-template-columns: 1fr;<br/>      gap: 9px;<br/>      margin: 14px 0;<br/>    }<br/><br/>    .fav-option {<br/>      width: 100%;<br/>      text-align: left;<br/>      padding: 12px 14px;<br/>      border-radius: 16px;<br/>      border: 1.5px solid rgba(216, 180, 254, 0.55);<br/>      background: rgba(255, 255, 255, 0.78);<br/>      cursor: pointer;<br/>      display: flex;<br/>      align-items: center;<br/>      gap: 10px;<br/>      font-family: inherit;<br/>      color: var(--text-main);<br/>    }<br/><br/>    .fav-option.selected {<br/>      background: linear-gradient(135deg, rgba(251, 207, 232, 0.72), rgba(233, 213, 255, 0.82));<br/>      border-color: rgba(236, 72, 153, 0.58);<br/>    }<br/><br/>    .fav-emoji { font-size: 1.35rem; flex-shrink: 0; }<br/>    .fav-name { font-size: 0.88rem; font-weight: 600; }<br/>    .fav-sub { font-size: 0.76rem; color: var(--text-soft); }<br/><br/>    /* Tebak-tebakan */<br/>    .quiz-block { margin-top: 14px; }<br/>    .quiz-block + .quiz-block {<br/>      margin-top: 14px;<br/>      padding-top: 14px;<br/>      border-top: 1px solid rgba(192, 132, 252, 0.28);<br/>    }<br/><br/>    .quiz-q {<br/>      font-size: 0.87rem;<br/>      font-weight: 600;<br/>      color: var(--text-main);<br/>      margin-bottom: 8px;<br/>      line-height: 1.48;<br/>    }<br/><br/>    .quiz-choices {<br/>      display: grid;<br/>      grid-template-columns: 1fr 1fr;<br/>      gap: 8px;<br/>    }<br/><br/>    .choice-btn {<br/>      border: 1px solid rgba(192, 132, 252, 0.42);<br/>      background: rgba(255, 255, 255, 0.82);<br/>      color: #6b2e5b;<br/>      font-family: inherit;<br/>      font-size: 0.82rem;<br/>      font-weight: 600;<br/>      padding: 10px 10px;<br/>      border-radius: 14px;<br/>      cursor: pointer;<br/>    }<br/><br/>    .choice-btn.picked-choice {<br/>      background: linear-gradient(135deg, var(--pink-deep), var(--lilac-deep));<br/>      color: #fff;<br/>      border-color: transparent;<br/>    }<br/><br/>    .btn-reveal-ans {<br/>      margin-top: 8px;<br/>      border: 1px dashed rgba(236, 72, 153, 0.5);<br/>      background: rgba(255, 255, 255, 0.84);<br/>      color: #832a68;<br/>      font-family: inherit;<br/>      font-size: 0.8rem;<br/>      font-weight: 600;<br/>      padding: 8px 12px;<br/>      border-radius: 12px;<br/>      cursor: pointer;<br/>    }<br/><br/>    .quiz-reply {<br/>      margin-top: 8px;<br/>      font-size: 0.84rem;<br/>      line-height: 1.52;<br/>      color: #5f244f;<br/>      font-weight: 500;<br/>      min-height: 18px;<br/>    }<br/><br/>    /* Mini-Game Ketuk Cinta / Bunga Melayang */<br/>    .catch-arena {<br/>      position: relative;<br/>      height: 196px;<br/>      margin: 14px 0 12px;<br/>      border-radius: 22px;<br/>      background: linear-gradient(160deg, rgba(255, 255, 255, 0.72), rgba(243, 232, 255, 0.78));<br/>      border: 1.5px solid rgba(216, 180, 254, 0.6);<br/>      overflow: hidden;<br/>    }<br/><br/>    .catch-hud {<br/>      position: absolute;<br/>      top: 10px;<br/>      left: 12px;<br/>      right: 12px;<br/>      display: flex;<br/>      justify-content: space-between;<br/>      font-size: 0.76rem;<br/>      font-weight: 600;<br/>      color: #7d3668;<br/>      z-index: 3;<br/>      pointer-events: none;<br/>    }<br/><br/>    .floating-item {<br/>      position: absolute;<br/>      border: none;<br/>      background: rgba(255, 255, 255, 0.9);<br/>      border: 1px solid rgba(236, 72, 153, 0.35);<br/>      border-radius: 999px;<br/>      width: 44px;<br/>      height: 44px;<br/>      font-size: 1.25rem;<br/>      cursor: pointer;<br/>      display: flex;<br/>      align-items: center;<br/>      justify-content: center;<br/>      box-shadow: 0 8px 16px -8px rgba(168, 85, 247, 0.45);<br/>      transition: transform 0.14s ease, opacity 0.2s ease;<br/>    }<br/><br/>    .floating-item:active { transform: scale(0.86); }<br/><br/>    /* Pilih 1 Amplop Misteri */<br/>    .envelope-row {<br/>      display: grid;<br/>      grid-template-columns: repeat(3, 1fr);<br/>      gap: 10px;<br/>      margin: 16px 0 14px;<br/>    }<br/><br/>    .envelope-btn {<br/>      border: 1.5px solid rgba(216, 180, 254, 0.62);<br/>      background: rgba(255, 255, 255, 0.82);<br/>      border-radius: 20px;<br/>      padding: 16px 8px;<br/>      cursor: pointer;<br/>      display: flex;<br/>      flex-direction: column;<br/>      align-items: center;<br/>      gap: 6px;<br/>      font-family: inherit;<br/>      color: var(--text-main);<br/>      transition: transform 0.18s ease, background 0.25s ease;<br/>    }<br/><br/>    .envelope-btn:active { transform: scale(0.95); }<br/>    .envelope-btn.opened {<br/>      background: linear-gradient(155deg, rgba(251, 207, 232, 0.85), rgba(233, 213, 255, 0.9));<br/>      border-color: rgba(236, 72, 153, 0.6);<br/>    }<br/><br/>    .env-icon { font-size: 1.65rem; }<br/>    .env-title { font-size: 0.78rem; font-weight: 600; }<br/><br/>    /* Kue &amp; Lilin Angka 20 */<br/>    .cake-center { text-align: center; }<br/><br/>    .cake-stage {<br/>      position: relative;<br/>      height: 146px;<br/>      display: flex;<br/>      align-items: flex-end;<br/>      justify-content: center;<br/>      margin: 10px 0 16px;<br/>    }<br/><br/>    .cake {<br/>      position: relative;<br/>      width: 164px;<br/>      height: 86px;<br/>      border-radius: 18px 18px 14px 14px;<br/>      background: linear-gradient(180deg, #fbcfe8 0%, #f472b6 100%);<br/>      box-shadow: 0 12px 24px -10px rgba(236, 72, 153, 0.45);<br/>      border: 2px solid rgba(255, 255, 255, 0.88);<br/>    }<br/><br/>    .icing {<br/>      position: absolute;<br/>      top: 0;<br/>      left: 0;<br/>      right: 0;<br/>      height: 26px;<br/>      background: linear-gradient(180deg, #fff8fc 0%, #f3e8ff 100%);<br/>      border-radius: 16px 16px 12px 12px;<br/>    }<br/><br/>    .number-candles {<br/>      position: absolute;<br/>      bottom: 84px;<br/>      left: 50%;<br/>      transform: translateX(-50%);<br/>      display: flex;<br/>      align-items: flex-end;<br/>      gap: 6px;<br/>    }<br/><br/>    .num-candle {<br/>      position: relative;<br/>      font-family: &#39;Cormorant Garamond&#39;, serif;<br/>      font-size: 2.3rem;<br/>      font-weight: 600;<br/>      line-height: 1;<br/>      padding: 2px 6px 0;<br/>      border-radius: 10px;<br/>      background: linear-gradient(180deg, #f5d0fe 0%, #f472b6 55%, #a855f7 100%);<br/>      -webkit-background-clip: text;<br/>      background-clip: text;<br/>      color: transparent;<br/>      filter: drop-shadow(0 2px 4px rgba(168, 85, 247, 0.25));<br/>    }<br/><br/>    .flame {<br/>      position: absolute;<br/>      top: -16px;<br/>      left: 50%;<br/>      transform: translateX(-50%);<br/>      width: 12px;<br/>      height: 18px;<br/>      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;<br/>      background: radial-gradient(circle at 50% 65%, #fffbeb 15%, #fbbf24 55%, #f97316 100%);<br/>      box-shadow: 0 0 15px rgba(251, 191, 36, 0.92);<br/>      animation: flicker 0.45s ease-in-out infinite alternate;<br/>      transition: opacity 0.35s ease, transform 0.35s ease;<br/>    }<br/><br/>    .flame.blown {<br/>      opacity: 0;<br/>      transform: translateX(-50%) scale(0.3);<br/>      animation: none;<br/>    }<br/><br/>    @keyframes flicker {<br/>      from { transform: translateX(-50%) scale(0.95) rotate(-2deg); }<br/>      to { transform: translateX(-50%) scale(1.06) rotate(2deg); }<br/>    }<br/><br/>    .wish-reveal {<br/>      margin-top: 12px;<br/>      font-size: 0.87rem;<br/>      color: #6b2d5c;<br/>      min-height: 22px;<br/>      font-weight: 500;<br/>    }<br/><br/>    /* Kapsul Harapan */<br/>    .wish-textarea {<br/>      width: 100%;<br/>      margin-top: 14px;<br/>      padding: 13px 14px;<br/>      border-radius: 16px;<br/>      border: 1.5px solid rgba(192, 132, 252, 0.45);<br/>      background: rgba(255, 255, 255, 0.88);<br/>      font-family: inherit;<br/>      font-size: 0.88rem;<br/>      color: var(--text-main);<br/>      resize: none;<br/>      outline: none;<br/>    }<br/><br/>    .wish-textarea:focus { border-color: var(--pink-deep); }<br/><br/>    .saved-capsule {<br/>      display: none;<br/>      margin-top: 12px;<br/>      padding: 13px 15px;<br/>      border-radius: 18px;<br/>      background: linear-gradient(150deg, rgba(251, 207, 232, 0.58), rgba(233, 213, 255, 0.68));<br/>      border: 1px solid rgba(236, 72, 153, 0.36);<br/>      font-size: 0.86rem;<br/>      line-height: 1.55;<br/>      color: #4f2342;<br/>    }<br/><br/>    .saved-capsule.show { display: block; }<br/><br/>    /* Skala Salting &amp; Surat Penutup */<br/>    .salting-grid {<br/>      display: grid;<br/>      grid-template-columns: repeat(2, 1fr);<br/>      gap: 8px;<br/>      margin: 12px 0 10px;<br/>    }<br/><br/>    .salting-btn {<br/>      border: 1px solid rgba(192, 132, 252, 0.45);<br/>      background: rgba(255, 255, 255, 0.84);<br/>      color: #6a2858;<br/>      font-family: inherit;<br/>      font-size: 0.8rem;<br/>      font-weight: 600;<br/>      padding: 9px 10px;<br/>      border-radius: 13px;<br/>      cursor: pointer;<br/>    }<br/><br/>    .salting-btn.active-scale {<br/>      background: linear-gradient(135deg, var(--pink-deep), var(--lilac-deep));<br/>      color: #fff;<br/>      border-color: transparent;<br/>    }<br/><br/>    .salting-reply {<br/>      font-size: 0.84rem;<br/>      line-height: 1.5;<br/>      color: #5e224e;<br/>      font-weight: 500;<br/>      min-height: 20px;<br/>      margin-bottom: 12px;<br/>    }<br/><br/>    .mini-letter {<br/>      padding-top: 12px;<br/>      border-top: 1px solid rgba(192, 132, 252, 0.28);<br/>      font-size: 0.88rem;<br/>      line-height: 1.62;<br/>      color: var(--text-main);<br/>    }<br/><br/>    .sign-off {<br/>      margin-top: 10px;<br/>      font-family: &#39;Cormorant Garamond&#39;, serif;<br/>      font-size: 1.2rem;<br/>      font-style: italic;<br/>      color: #8b3a72;<br/>    }<br/><br/>    /* Navigasi */<br/>    .btn-primary {<br/>      width: 100%;<br/>      border: none;<br/>      cursor: pointer;<br/>      background: linear-gradient(135deg, var(--pink-deep) 0%, var(--lilac-deep) 100%);<br/>      color: #fff;<br/>      font-family: inherit;<br/>      font-size: 0.91rem;<br/>      font-weight: 600;<br/>      padding: 13px 16px;<br/>      border-radius: 16px;<br/>      box-shadow: 0 12px 24px -10px rgba(168, 85, 247, 0.55);<br/>      transition: transform 0.16s ease;<br/>    }<br/><br/>    .btn-primary:active { transform: scale(0.98); }<br/><br/>    .nav-row {<br/>      display: flex;<br/>      gap: 10px;<br/>      margin-top: 18px;<br/>    }<br/><br/>    .btn-back {<br/>      border: 1px solid rgba(168, 85, 247, 0.35);<br/>      background: rgba(255, 255, 255, 0.78);<br/>      color: #68365b;<br/>      font-family: inherit;<br/>      font-size: 0.87rem;<br/>      font-weight: 600;<br/>      padding: 12px 14px;<br/>      border-radius: 15px;<br/>      cursor: pointer;<br/>      white-space: nowrap;<br/>    }<br/><br/>    .nav-row .btn-primary { flex: 1; }<br/><br/>    .confetti-piece {<br/>      position: fixed;<br/>      top: -12px;<br/>      width: 9px;<br/>      height: 14px;<br/>      border-radius: 3px;<br/>      pointer-events: none;<br/>      z-index: 40;<br/>      animation: confettiDrop var(--dur, 2.2s) ease-out forwards;<br/>    }<br/><br/>    @keyframes confettiDrop {<br/>      0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 1; }<br/>      100% { transform: translate3d(var(--x, 0px), 100vh, 0) rotate(540deg); opacity: 0; }<br/>    }<br/>  &lt;/style&gt;<br/>&lt;/head&gt;<br/>&lt;body&gt;<br/>  &lt;div class=&quot;petals-layer&quot; id=&quot;petalsLayer&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;<br/>  &lt;div class=&quot;fireworks-layer&quot; id=&quot;fireworksLayer&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;<br/><br/>  &lt;!-- Audio tetap berjalan di latar belakang meski berpindah sesi --&gt;<br/>  &lt;audio id=&quot;bgAudio&quot; src=&quot;honeybee.mp3&quot; preload=&quot;metadata&quot; loop&gt;&lt;/audio&gt;<br/><br/>  &lt;!-- LAYAR AWALAN SEBELUM MASUK SESI --&gt;<br/>  &lt;div class=&quot;intro-gate&quot; id=&quot;introGate&quot;&gt;<br/>    &lt;div class=&quot;intro-box&quot;&gt;<br/>      &lt;div id=&quot;introContent&quot;&gt;<br/>        &lt;div class=&quot;intro-salam&quot;&gt;Assalamu&#39;alaikum wr. wb.&lt;/div&gt;<br/>        &lt;div class=&quot;intro-kicker&quot;&gt;A Little Surprise Made With Love&lt;/div&gt;<br/>        &lt;h2 class=&quot;intro-title&quot;&gt;Buat Ayra&lt;/h2&gt;<br/>        &lt;div class=&quot;intro-sub&quot;&gt;Ayra Tsania Hibatullah Azzulfikar&lt;/div&gt;<br/>        &lt;p class=&quot;intro-desc&quot;&gt;<br/>          ada kejutan kecil yang tulus di buat oleh ben khusus untukmu orang yang dia sayangi<br/>        &lt;/p&gt;<br/>        &lt;button class=&quot;btn-primary&quot; id=&quot;startSurpriseBtn&quot; type=&quot;button&quot;&gt;<br/>          klik ini sayang🤗<br/>        &lt;/button&gt;<br/>      &lt;/div&gt;<br/><br/>      &lt;div class=&quot;preparing-state&quot; id=&quot;preparingState&quot;&gt;<br/>        &lt;div class=&quot;ring-loader&quot;&gt;❀&lt;/div&gt;<br/>        &lt;div class=&quot;preparing-text&quot;&gt;Preparing Something For You&lt;/div&gt;<br/>      &lt;/div&gt;<br/>    &lt;/div&gt;<br/>  &lt;/div&gt;<br/><br/>  &lt;div class=&quot;shell&quot;&gt;<br/>    &lt;div class=&quot;step-bar&quot;&gt;<br/>      &lt;div class=&quot;step-dots&quot; id=&quot;stepDots&quot;&gt;<br/>        &lt;span class=&quot;step-dot active&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>        &lt;span class=&quot;step-dot&quot;&gt;&lt;/span&gt;<br/>      &lt;/div&gt;<br/>      &lt;div class=&quot;step-label&quot; id=&quot;stepLabel&quot;&gt;Sesi 1 dari 10&lt;/div&gt;<br/>    &lt;/div&gt;<br/><br/>    &lt;main class=&quot;card&quot;&gt;<br/>      &lt;!-- SESI 1 --&gt;<br/>      &lt;section class=&quot;page active&quot; id=&quot;page-0&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;🎆 Selamat Ulang Tahun 🎆&lt;/div&gt;<br/>        &lt;h1&gt;Untuk Hari Spesialmu&lt;/h1&gt;<br/>        &lt;div class=&quot;full-name&quot;&gt;Ayra Tsania Hibatullah Azzulfikar&lt;/div&gt;<br/>        &lt;p class=&quot;lead&quot;&gt;<br/>          Selamat bertambah usia ya, Ayra. Ada 10 sesi kecil yang disiapin pelan-pelan buat nemenin harimu.<br/>        &lt;/p&gt;<br/><br/>        &lt;div class=&quot;floral-divider&quot;&gt;✿ ❀ ✿&lt;/div&gt;<br/><br/>        &lt;div class=&quot;affection-note&quot;&gt;<br/>          Setiap detail di sini disusun pelan-pelan karena kamu berarti banget buat aku. Yuk mulai dari taman bunga kecil buatmu dulu ya, sayang.<br/>        &lt;/div&gt;<br/><br/>        &lt;button class=&quot;btn-spark&quot; type=&quot;button&quot; onclick=&quot;launchFireworksShow()&quot;&gt;<br/>          Nyalakan Kembang Api Lagi 🎆<br/>        &lt;/button&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(1)&quot;&gt;<br/>            Ke Sesi Petik Bunga, Sayang 🌷 →<br/>          &lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 2 --&gt;<br/>      &lt;section class=&quot;page&quot; id=&quot;page-1&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;🌷 Sesi 2 • Taman Kecil&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Petik Bunganya Dulu&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;Ketuk bunga-bunga ini satu per satu buat ngintip pesannya.&lt;/p&gt;<br/><br/>        &lt;div class=&quot;garden-row&quot;&gt;<br/>          &lt;button class=&quot;flower-btn&quot; type=&quot;button&quot; onclick=&quot;pickFlower(0, this)&quot;&gt;<br/>            &lt;span class=&quot;flower-icon&quot;&gt;🌷&lt;/span&gt;<br/>            &lt;span class=&quot;flower-label&quot;&gt;Bunga 1&lt;/span&gt;<br/>          &lt;/button&gt;<br/>          &lt;button class=&quot;flower-btn&quot; type=&quot;button&quot; onclick=&quot;pickFlower(1, this)&quot;&gt;<br/>            &lt;span class=&quot;flower-icon&quot;&gt;🌸&lt;/span&gt;<br/>            &lt;span class=&quot;flower-label&quot;&gt;Bunga 2&lt;/span&gt;<br/>          &lt;/button&gt;<br/>          &lt;button class=&quot;flower-btn&quot; type=&quot;button&quot; onclick=&quot;pickFlower(2, this)&quot;&gt;<br/>            &lt;span class=&quot;flower-icon&quot;&gt;🪻&lt;/span&gt;<br/>            &lt;span class=&quot;flower-label&quot;&gt;Bunga 3&lt;/span&gt;<br/>          &lt;/button&gt;<br/>          &lt;button class=&quot;flower-btn&quot; type=&quot;button&quot; onclick=&quot;pickFlower(3, this)&quot;&gt;<br/>            &lt;span class=&quot;flower-icon&quot;&gt;🌺&lt;/span&gt;<br/>            &lt;span class=&quot;flower-label&quot;&gt;Bunga 4&lt;/span&gt;<br/>          &lt;/button&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;soft-bubble&quot; id=&quot;gardenBubble&quot;&gt;Ketuk salah satu bunga di atas buat ngintip isinya...&lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(0)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(2)&quot;&gt;Lanjut →&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 3 --&gt;<br/>      &lt;section class=&quot;page&quot; id=&quot;page-2&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;💐 Sesi 3 • Pilihanmu&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Pilih Bunga Favoritmu&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;Dari tiga bunga ini, mana yang paling bikin kamu senyum pas lihat?&lt;/p&gt;<br/><br/>        &lt;div class=&quot;fav-grid&quot;&gt;<br/>          &lt;button class=&quot;fav-option&quot; type=&quot;button&quot; onclick=&quot;chooseFavFlower(0, this)&quot;&gt;<br/>            &lt;span class=&quot;fav-emoji&quot;&gt;🌷&lt;/span&gt;<br/>            &lt;div&gt;<br/>              &lt;div class=&quot;fav-name&quot;&gt;Pink Tulip&lt;/div&gt;<br/>              &lt;div class=&quot;fav-sub&quot;&gt;Lembut, kalem, tapi manisnya nempel&lt;/div&gt;<br/>            &lt;/div&gt;<br/>          &lt;/button&gt;<br/>          &lt;button class=&quot;fav-option&quot; type=&quot;button&quot; onclick=&quot;chooseFavFlower(1, this)&quot;&gt;<br/>            &lt;span class=&quot;fav-emoji&quot;&gt;🪻&lt;/span&gt;<br/>            &lt;div&gt;<br/>              &lt;div class=&quot;fav-name&quot;&gt;Lavender Ungu&lt;/div&gt;<br/>              &lt;div class=&quot;fav-sub&quot;&gt;Tenang, hangat, dan bikin betah&lt;/div&gt;<br/>            &lt;/div&gt;<br/>          &lt;/button&gt;<br/>          &lt;button class=&quot;fav-option&quot; type=&quot;button&quot; onclick=&quot;chooseFavFlower(2, this)&quot;&gt;<br/>            &lt;span class=&quot;fav-emoji&quot;&gt;🌸&lt;/span&gt;<br/>            &lt;div&gt;<br/>              &lt;div class=&quot;fav-name&quot;&gt;Sakura Pastel&lt;/div&gt;<br/>              &lt;div class=&quot;fav-sub&quot;&gt;Manis setiap kali hadir di pandangan&lt;/div&gt;<br/>            &lt;/div&gt;<br/>          &lt;/button&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;soft-bubble&quot; id=&quot;favReply&quot;&gt;Pilih satu bunga di atas ya...&lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(1)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(3)&quot;&gt;Lanjut →&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 4 --&gt;<br/>      &lt;section class=&quot;page&quot; id=&quot;page-3&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;✨ Sesi 4 • Tebak Dikit&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Coba Jawab Santai&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;Bukan ujian kok—cuma mau nebak suasana hatimu hari ini.&lt;/p&gt;<br/><br/>        &lt;div class=&quot;quiz-block&quot;&gt;<br/>          &lt;div class=&quot;quiz-q&quot;&gt;1. Kalau lagi capek atau bad mood, kamu lebih milih:&lt;/div&gt;<br/>          &lt;div class=&quot;quiz-choices&quot;&gt;<br/>            &lt;button class=&quot;choice-btn&quot; type=&quot;button&quot; onclick=&quot;answerQuiz(1, 0, this)&quot;&gt;Dengerin lagu / me-time&lt;/button&gt;<br/>            &lt;button class=&quot;choice-btn&quot; type=&quot;button&quot; onclick=&quot;answerQuiz(1, 1, this)&quot;&gt;Cerita atau jajan manis/pedes&lt;/button&gt;<br/>          &lt;/div&gt;<br/>          &lt;div class=&quot;quiz-reply&quot; id=&quot;quizReply1&quot;&gt;&lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;quiz-block&quot;&gt;<br/>          &lt;div class=&quot;quiz-q&quot;&gt;2. Di hari ulang tahun ini, hadiah kecil yang paling oke:&lt;/div&gt;<br/>          &lt;div class=&quot;quiz-choices&quot;&gt;<br/>            &lt;button class=&quot;choice-btn&quot; type=&quot;button&quot; onclick=&quot;answerQuiz(2, 0, this)&quot;&gt;Bunga + ucapan tulus&lt;/button&gt;<br/>            &lt;button class=&quot;choice-btn&quot; type=&quot;button&quot; onclick=&quot;answerQuiz(2, 1, this)&quot;&gt;Waktu &amp;amp; perhatian pelan-pelan&lt;/button&gt;<br/>          &lt;/div&gt;<br/>          &lt;div class=&quot;quiz-reply&quot; id=&quot;quizReply2&quot;&gt;&lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(2)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(4)&quot;&gt;Lanjut →&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 5 --&gt;<br/>      &lt;section class=&quot;page&quot; id=&quot;page-4&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;💘 Sesi 5 • Gombal Tipis-Tipis&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Tebak Dulu Kalau Bisa&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;Coba tebak di dalam hati dulu ya. Kalau nyerah, klik tombol jawabannya.&lt;/p&gt;<br/><br/>        &lt;div class=&quot;quiz-block&quot;&gt;<br/>          &lt;div class=&quot;quiz-q&quot;&gt;1. Bunga apa yang nggak pernah layu meski nggak disiram tiap hari?&lt;/div&gt;<br/>          &lt;button class=&quot;btn-reveal-ans&quot; type=&quot;button&quot; onclick=&quot;revealRiddle(1)&quot;&gt;Lihat Jawaban 1 💡&lt;/button&gt;<br/>          &lt;div class=&quot;quiz-reply&quot; id=&quot;riddleReply1&quot;&gt;&lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;quiz-block&quot;&gt;<br/>          &lt;div class=&quot;quiz-q&quot;&gt;2. Bedanya ulang tahun kamu sama bunga pink-ungu apa?&lt;/div&gt;<br/>          &lt;button class=&quot;btn-reveal-ans&quot; type=&quot;button&quot; onclick=&quot;revealRiddle(2)&quot;&gt;Lihat Jawaban 2 💡&lt;/button&gt;<br/>          &lt;div class=&quot;quiz-reply&quot; id=&quot;riddleReply2&quot;&gt;&lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(3)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(5)&quot;&gt;Lanjut ke Mini-Game →&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 6: Mini-Game Ketuk Cinta / Bunga Melayang --&gt;<br/>      &lt;section class=&quot;page&quot; id=&quot;page-5&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;🌸 Sesi 6 • Mini-Game&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Ketuk 5 Bunga &amp;amp; Hati&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;Coba ketuk 5 ikon yang melayang di kotak ini ya.&lt;/p&gt;<br/><br/>        &lt;div class=&quot;catch-arena&quot; id=&quot;catchArena&quot;&gt;<br/>          &lt;div class=&quot;catch-hud&quot;&gt;<br/>            &lt;span id=&quot;catchScore&quot;&gt;Terketuk: 0 / 5&lt;/span&gt;<br/>            &lt;span&gt;Santai aja&lt;/span&gt;<br/>          &lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;soft-bubble&quot; id=&quot;catchMsg&quot;&gt;Ketuk bunga atau hati yang muncul di kotak atas...&lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(4)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(6)&quot;&gt;Lanjut →&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 7: Pilih 1 Amplop Misteri --&gt;<br/>      &lt;section class=&quot;page&quot; id=&quot;page-6&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;✉️ Sesi 7 • Amplop Misteri&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Pilih Satu Amplop&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;Tiap amplop nyimpen isi yang beda. Coba pilih salah satu buat dibuka.&lt;/p&gt;<br/><br/>        &lt;div class=&quot;envelope-row&quot;&gt;<br/>          &lt;button class=&quot;envelope-btn&quot; type=&quot;button&quot; onclick=&quot;openEnvelope(0, this)&quot;&gt;<br/>            &lt;span class=&quot;env-icon&quot;&gt;💌&lt;/span&gt;<br/>            &lt;span class=&quot;env-title&quot;&gt;Amplop Pink&lt;/span&gt;<br/>          &lt;/button&gt;<br/>          &lt;button class=&quot;envelope-btn&quot; type=&quot;button&quot; onclick=&quot;openEnvelope(1, this)&quot;&gt;<br/>            &lt;span class=&quot;env-icon&quot;&gt;💜&lt;/span&gt;<br/>            &lt;span class=&quot;env-title&quot;&gt;Amplop Lilac&lt;/span&gt;<br/>          &lt;/button&gt;<br/>          &lt;button class=&quot;envelope-btn&quot; type=&quot;button&quot; onclick=&quot;openEnvelope(2, this)&quot;&gt;<br/>            &lt;span class=&quot;env-icon&quot;&gt;🌷&lt;/span&gt;<br/>            &lt;span class=&quot;env-title&quot;&gt;Amplop Bunga&lt;/span&gt;<br/>          &lt;/button&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;soft-bubble&quot; id=&quot;envelopeMsg&quot;&gt;Belum ada amplop yang dibuka...&lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(5)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(7)&quot;&gt;Lanjut ke Kue →&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 8: Kue &amp; Lilin Angka 20 --&gt;<br/>      &lt;section class=&quot;page cake-center&quot; id=&quot;page-7&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;🎂 Sesi 8 • Tiup Lilin&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Buat Harapanmu Dulu&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;Bayangin satu harapan baik di usia baru ini, lalu tiup lilinnya.&lt;/p&gt;<br/><br/>        &lt;div class=&quot;cake-stage&quot;&gt;<br/>          &lt;div class=&quot;number-candles&quot; aria-label=&quot;Lilin angka 20&quot;&gt;<br/>            &lt;div class=&quot;num-candle&quot;&gt;<br/>              &lt;div class=&quot;flame flame-item&quot;&gt;&lt;/div&gt;<br/>              2<br/>            &lt;/div&gt;<br/>            &lt;div class=&quot;num-candle&quot;&gt;<br/>              &lt;div class=&quot;flame flame-item&quot;&gt;&lt;/div&gt;<br/>              0<br/>            &lt;/div&gt;<br/>          &lt;/div&gt;<br/>          &lt;div class=&quot;cake&quot;&gt;<br/>            &lt;div class=&quot;icing&quot;&gt;&lt;/div&gt;<br/>          &lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;button class=&quot;btn-primary&quot; id=&quot;blowBtn&quot; type=&quot;button&quot;&gt;Tiup Lilinnya ✨&lt;/button&gt;<br/>        &lt;div class=&quot;wish-reveal&quot; id=&quot;wishReveal&quot;&gt;&lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(6)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(8)&quot;&gt;Lanjut →&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 9: Kapsul Harapan --&gt;<br/>      &lt;section class=&quot;page&quot; id=&quot;page-8&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;🫙 Sesi 9 • Kapsul Harapan&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Simpan Satu Harapanmu&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;<br/>          Tulis satu hal yang pengen banget kamu capai atau rasain di tahun ini. Cuma kamu yang baca di layar ini.<br/>        &lt;/p&gt;<br/><br/>        &lt;textarea<br/>          class=&quot;wish-textarea&quot;<br/>          id=&quot;wishInput&quot;<br/>          rows=&quot;3&quot;<br/>          placeholder=&quot;Contoh: Semoga tahun ini hatiku makin tenang dan semua urusanku dilancarkan...&quot;<br/>        &gt;&lt;/textarea&gt;<br/><br/>        &lt;button class=&quot;btn-primary&quot; style=&quot;margin-top: 10px;&quot; type=&quot;button&quot; onclick=&quot;saveWishCapsule()&quot;&gt;<br/>          Simpan ke Kapsul Harapan 💜<br/>        &lt;/button&gt;<br/><br/>        &lt;div class=&quot;saved-capsule&quot; id=&quot;savedCapsule&quot;&gt;&lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(7)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(9)&quot;&gt;Sesi Terakhir →&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/><br/>      &lt;!-- SESI 10: Skala Salting &amp; Surat Penutup --&gt;<br/>      &lt;section class=&quot;page&quot; id=&quot;page-9&quot;&gt;<br/>        &lt;div class=&quot;tag&quot;&gt;💜 Sesi 10 • Penutup dari Ben&lt;/div&gt;<br/>        &lt;h2 class=&quot;page-title&quot;&gt;Jujur, Lagi Salting Seberapa?&lt;/h2&gt;<br/>        &lt;p class=&quot;page-desc&quot;&gt;Pilih reaksi yang paling pas setelah ngecek semuanya:&lt;/p&gt;<br/><br/>        &lt;div class=&quot;salting-grid&quot;&gt;<br/>          &lt;button class=&quot;salting-btn&quot; type=&quot;button&quot; onclick=&quot;pickSalting(0, this)&quot;&gt;Biasa aja (bohong dikit)&lt;/button&gt;<br/>          &lt;button class=&quot;salting-btn&quot; type=&quot;button&quot; onclick=&quot;pickSalting(1, this)&quot;&gt;Senyum-senyum sendiri&lt;/button&gt;<br/>          &lt;button class=&quot;salting-btn&quot; type=&quot;button&quot; onclick=&quot;pickSalting(2, this)&quot;&gt;Mulai salting tipis&lt;/button&gt;<br/>          &lt;button class=&quot;salting-btn&quot; type=&quot;button&quot; onclick=&quot;pickSalting(3, this)&quot;&gt;salting brutal🤭🥰🫣&lt;/button&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;salting-reply&quot; id=&quot;saltingReply&quot;&gt;&lt;/div&gt;<br/><br/>        &lt;div class=&quot;mini-letter&quot;&gt;<br/>          Selamat ulang tahun, Ayra. Semoga usia baru ini ngebawa banyak kabar baik dan bikin kamu makin bahagia. Aku di sini terus berusaha pelan-pelan ngambil hatimu dengan tulus.<br/>          &lt;div class=&quot;sign-off&quot;&gt;— Ben&lt;/div&gt;<br/>        &lt;/div&gt;<br/><br/>        &lt;div class=&quot;nav-row&quot;&gt;<br/>          &lt;button class=&quot;btn-back&quot; type=&quot;button&quot; onclick=&quot;goToPage(8)&quot;&gt;← Kembali&lt;/button&gt;<br/>          &lt;button class=&quot;btn-primary&quot; type=&quot;button&quot; onclick=&quot;goToPage(0)&quot;&gt;Ulang dari Awal ↺&lt;/button&gt;<br/>        &lt;/div&gt;<br/>      &lt;/section&gt;<br/>    &lt;/main&gt;<br/>  &lt;/div&gt;<br/><br/>  &lt;script&gt;<br/>    // Kelopak bunga jatuh<br/>    const petalsLayer = document.getElementById(&#39;petalsLayer&#39;);<br/>    const petalColors = [<br/>      &#39;rgba(244, 114, 182, 0.58)&#39;,<br/>      &#39;rgba(251, 207, 232, 0.78)&#39;,<br/>      &#39;rgba(192, 132, 252, 0.55)&#39;,<br/>      &#39;rgba(233, 213, 255, 0.75)&#39;<br/>    ];<br/><br/>    for (let i = 0; i &lt; 16; i++) {<br/>      const petal = document.createElement(&#39;span&#39;);<br/>      petal.className = &#39;petal&#39;;<br/>      petal.style.left = Math.random() * 100 + &#39;%&#39;;<br/>      petal.style.background = petalColors[i % petalColors.length];<br/>      petal.style.animationDuration = (7 + Math.random() * 6) + &#39;s&#39;;<br/>      petal.style.animationDelay = (-Math.random() * 10) + &#39;s&#39;;<br/>      petal.style.setProperty(&#39;--drift&#39;, ((Math.random() - 0.5) * 90) + &#39;px&#39;);<br/>      const scale = 0.75 + Math.random() * 0.65;<br/>      petal.style.transform = `scale(${scale})`;<br/>      petalsLayer.appendChild(petal);<br/>    }<br/><br/>    // Kembang api<br/>    const fireworksLayer = document.getElementById(&#39;fireworksLayer&#39;);<br/>    const sparkColors = [&#39;#ec4899&#39;, &#39;#a855f7&#39;, &#39;#f472b6&#39;, &#39;#c084fc&#39;, &#39;#fbbf24&#39;, &#39;#f9a8d4&#39;];<br/><br/>    function spawnFireworkBurst(cx, cy) {<br/>      const count = 22;<br/>      for (let i = 0; i &lt; count; i++) {<br/>        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.25;<br/>        const dist = 52 + Math.random() * 58;<br/>        const tx = Math.cos(angle) * dist;<br/>        const ty = Math.sin(angle) * dist;<br/><br/>        const spark = document.createElement(&#39;span&#39;);<br/>        spark.className = &#39;spark&#39;;<br/>        spark.style.left = cx + &#39;px&#39;;<br/>        spark.style.top = cy + &#39;px&#39;;<br/>        spark.style.color = sparkColors[i % sparkColors.length];<br/>        spark.style.background = sparkColors[i % sparkColors.length];<br/>        spark.style.setProperty(&#39;--tx&#39;, tx.toFixed(1) + &#39;px&#39;);<br/>        spark.style.setProperty(&#39;--ty&#39;, ty.toFixed(1) + &#39;px&#39;);<br/>        fireworksLayer.appendChild(spark);<br/><br/>        setTimeout(() =&gt; spark.remove(), 1200);<br/>      }<br/>    }<br/><br/>    function launchFireworksShow() {<br/>      const w = window.innerWidth;<br/>      const h = window.innerHeight;<br/>      spawnFireworkBurst(w * 0.26, h * 0.28);<br/>      setTimeout(() =&gt; spawnFireworkBurst(w * 0.74, h * 0.24), 220);<br/>      setTimeout(() =&gt; spawnFireworkBurst(w * 0.52, h * 0.36), 440);<br/>    }<br/><br/>    // Musik (dipicu saat klik tombol awalan dan jalan terus saat pindah sesi)<br/>    const audio = document.getElementById(&#39;bgAudio&#39;);<br/>    let isPlaying = false;<br/><br/>    async function playMusicFromStart() {<br/>      if (isPlaying) return true;<br/>      try {<br/>        await audio.play();<br/>        isPlaying = true;<br/>        return true;<br/>      } catch (err) {<br/>        return false;<br/>      }<br/>    }<br/><br/>    // Layar Awalan + Transisi Preparing + Auto-play lagu<br/>    const introGate = document.getElementById(&#39;introGate&#39;);<br/>    const introContent = document.getElementById(&#39;introContent&#39;);<br/>    const preparingState = document.getElementById(&#39;preparingState&#39;);<br/>    const startSurpriseBtn = document.getElementById(&#39;startSurpriseBtn&#39;);<br/><br/>    startSurpriseBtn.addEventListener(&#39;click&#39;, async () =&gt; {<br/>      await playMusicFromStart();<br/>      introContent.style.display = &#39;none&#39;;<br/>      preparingState.classList.add(&#39;active&#39;);<br/><br/>      setTimeout(() =&gt; {<br/>        introGate.classList.add(&#39;fade-out&#39;);<br/>        launchFireworksShow();<br/>      }, 1150);<br/>    });<br/><br/>    window.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {<br/>      initFloatingCatchGame();<br/>    });<br/><br/>    // Navigasi 10 sesi<br/>    const pages = document.querySelectorAll(&#39;.page&#39;);<br/>    const dots = document.querySelectorAll(&#39;.step-dot&#39;);<br/>    const stepLabel = document.getElementById(&#39;stepLabel&#39;);<br/><br/>    function goToPage(index) {<br/>      pages.forEach((p, i) =&gt; p.classList.toggle(&#39;active&#39;, i === index));<br/>      dots.forEach((d, i) =&gt; d.classList.toggle(&#39;active&#39;, i === index));<br/>      stepLabel.textContent = `Sesi ${index + 1} dari ${pages.length}`;<br/>      window.scrollTo({ top: 0, behavior: &#39;smooth&#39; });<br/>      if (index === 0) launchFireworksShow();<br/>    }<br/><br/>    // Sesi 2: Petik bunga<br/>    const flowerMessages = [<br/>      &#39;🌷 Bunga 1: Jujur, kamu tuh gampang banget bikin kepikiran seharian.,aku udah kayak tergila-gila sama kamu wkwkwkw&#39;,<br/>      &#39;🌸 Bunga 2: Kalau lagi capek, semoga pesan kecil ini bikin sedikit enakan.&#39;,<br/>      &#39;🪻 Bunga 3: Suka banget sama vibe-mu—nggak neko-neko udah bikin srek,rill bidadari yang berbeda dari lainnya😍.&#39;,<br/>      &#39;🌺 Bunga 4: Selamat ulang tahun, Ayra. Semoga makin banyak hal baik datang ke kamu!&#39;<br/>    ];<br/>    const pickedSet = new Set();<br/>    const gardenBubble = document.getElementById(&#39;gardenBubble&#39;);<br/><br/>    function pickFlower(idx, btn) {<br/>      btn.classList.add(&#39;picked&#39;);<br/>      pickedSet.add(idx);<br/>      gardenBubble.textContent = pickedSet.size === flowerMessages.length<br/>        ? flowerMessages[idx] + &#39; (Semua bunga udah kepetik 💜)&#39;<br/>        : flowerMessages[idx];<br/>    }<br/><br/>    // Sesi 3: Pilih bunga favorit<br/>    const favMessages = [<br/>      &#39;🌷 Pink Tulip: Pas banget sama kamu—kelihatannya kalem, tapi sekalinya dikenal bikin susah lupa.&#39;,<br/>      &#39;🪻 Lavender Ungu: Cocok buat kamu yang kehadirannya sering bikin suasana terasa lebih tenang.&#39;,<br/>      &#39;🌸 Sakura Pastel: Manisnya nggak berlebihan, tapi selalu berhasil bikin orang di dekatmu senyum.&#39;<br/>    ];<br/>    const favReply = document.getElementById(&#39;favReply&#39;);<br/><br/>    function chooseFavFlower(idx, btn) {<br/>      document.querySelectorAll(&#39;.fav-option&#39;).forEach(el =&gt; el.classList.remove(&#39;selected&#39;));<br/>      btn.classList.add(&#39;selected&#39;);<br/>      favReply.textContent = favMessages[idx];<br/>    }<br/><br/>    // Sesi 4: Tebak-tebakan ringan<br/>    function answerQuiz(qNum, choiceIdx, btn) {<br/>      const parent = btn.parentElement;<br/>      parent.querySelectorAll(&#39;.choice-btn&#39;).forEach(b =&gt; b.classList.remove(&#39;picked-choice&#39;));<br/>      btn.classList.add(&#39;picked-choice&#39;);<br/><br/>      if (qNum === 1) {<br/>        document.getElementById(&#39;quizReply1&#39;).textContent = choiceIdx === 0<br/>          ? &#39;Noted! Kalau lagi butuh ruang tenang, aku siap nemenin pelan-pelan tanpa ganggu.&#39;<br/>          : &#39;Noted! Lain kali kalau lagi capek, tinggal kode aja—siap dengerin atau bawain yang manis/pedes.&#39;;<br/>      } else {<br/>        document.getElementById(&#39;quizReply2&#39;).textContent = choiceIdx === 0<br/>          ? &#39;Pas banget, versi digitalnya udah ada di sini—semoga nyampe ke hatimu ya.&#39;<br/>          : &#39;Tenang aja, yang satu itu lagi aku usahain pelan-pelan setiap hari 😉&#39;;<br/>      }<br/>    }<br/><br/>    // Sesi 5: Tebak-tebakan gombal tipis-tipis<br/>    function revealRiddle(num) {<br/>      if (num === 1) {<br/>        document.getElementById(&#39;riddleReply1&#39;).textContent =<br/>          &#39;Bunga yang tumbuh di hati setiap kali inget senyum kamu. Eaaa tipis-tipis dulu 🌸&#39;;<br/>      } else {<br/>        document.getElementById(&#39;riddleReply2&#39;).textContent =<br/>          &#39;Kalau bunga pink-ungu bikin halaman ini kelihatan manis, ulang tahun kamu bikin hari ini jadi spesial buat aku 💜&#39;;<br/>      }<br/>    }<br/><br/>    // Sesi 6: Mini-Game Ketuk Bunga &amp; Hati<br/>    const catchArena = document.getElementById(&#39;catchArena&#39;);<br/>    const catchScoreEl = document.getElementById(&#39;catchScore&#39;);<br/>    const catchMsgEl = document.getElementById(&#39;catchMsg&#39;);<br/>    let caughtCount = 0;<br/>    const catchTarget = 5;<br/>    const catchCompliments = [<br/>      &#39;Kena satu! Ahaaayyyy Pelan-pelan mulai keambil ya 🌸&#39;,<br/>      &#39;Dua! Kayaknya kamu mulai senyum nih xixi👀&#39;,<br/>      &#39;Tiga! Satu per satu, persis kayak cara aku mendekat pelan-pelan 💜&#39;,<br/>      &#39;Empat! Tinggal satu lagi—jangan sampai lolos!&#39;,<br/>      &#39;Lima tercapai! Target kecil hari ini beres, makasih udah mainin sayangg ✨&#39;<br/>    ];<br/><br/>    function initFloatingCatchGame() {<br/>      const icons = [&#39;🌷&#39;, &#39;🌸&#39;, &#39;🪻&#39;, &#39;💜&#39;, &#39;✨&#39;];<br/>      for (let i = 0; i &lt; 6; i++) {<br/>        const btn = document.createElement(&#39;button&#39;);<br/>        btn.type = &#39;button&#39;;<br/>        btn.className = &#39;floating-item&#39;;<br/>        btn.textContent = icons[i % icons.length];<br/>        moveFloatingItem(btn);<br/><br/>        btn.addEventListener(&#39;click&#39;, () =&gt; {<br/>          if (caughtCount &lt; catchTarget) {<br/>            caughtCount++;<br/>            catchScoreEl.textContent = `Terketuk: ${caughtCount} / ${catchTarget}`;<br/>            catchMsgEl.textContent = catchCompliments[caughtCount - 1];<br/>            spawnConfetti(10);<br/>          } else {<br/>            catchMsgEl.textContent = &#39;Udah 5/5! Tapi kalau mau ketuk-ketuk lagi buat seru-seruan, bebas 😉&#39;;<br/>          }<br/>          moveFloatingItem(btn);<br/>        });<br/><br/>        catchArena.appendChild(btn);<br/><br/>        setInterval(() =&gt; {<br/>          if (document.body.contains(btn)) {<br/>            moveFloatingItem(btn);<br/>          }<br/>        }, 1700 + i * 260);<br/>      }<br/>    }<br/><br/>    function moveFloatingItem(el) {<br/>      const maxX = Math.max(20, catchArena.clientWidth - 60);<br/>      const maxY = Math.max(46, catchArena.clientHeight - 56);<br/>      const x = 10 + Math.random() * maxX;<br/>      const y = 36 + Math.random() * (maxY - 30);<br/>      el.style.left = x + &#39;px&#39;;<br/>      el.style.top = y + &#39;px&#39;;<br/>    }<br/><br/>    // Sesi 7: Pilih 1 Amplop Misteri<br/>    const envelopeContents = [<br/>      &#39;💌 Amplop Pink: &quot;Jujur, nggak gampang bikin sesuatu buat orang yang bikin kepikiran. Semoga yang simpel ini bisa bikin kamu ngerasa dihargai ya.aku buatnya aja excited banget, ini tulus banget dari hati 🥰&quot;&#39;,<br/>      &#39;💜 Amplop Lilac: &quot;Doa kecil dari Ben: semoga tahun ini hatimu lebih enteng, urusanmu dimudahkan, catering lebih banyak orderan🙏, dan nggak ada lagi malam yang bikin kepikiran berat.&quot;&#39;,<br/>      &#39;🌷 Amplop Bunga: &quot;Kupon kecil virtual: hari ini aku akan berusaha meluangkan waktu lebih banyak untuk mabar, cerita random, atau sekadar ngobrol santai tanpa mikir harus jaim.&quot;&#39;<br/>    ];<br/><br/>    function openEnvelope(idx, btn) {<br/>      document.querySelectorAll(&#39;.envelope-btn&#39;).forEach(b =&gt; b.classList.remove(&#39;opened&#39;));<br/>      btn.classList.add(&#39;opened&#39;);<br/>      document.getElementById(&#39;envelopeMsg&#39;).textContent = envelopeContents[idx];<br/>      spawnConfetti(14);<br/>    }<br/><br/>    // Sesi 8: Kue &amp; Lilin Angka 20<br/>    const blowBtn = document.getElementById(&#39;blowBtn&#39;);<br/>    const flames = document.querySelectorAll(&#39;.flame-item&#39;);<br/>    const wishReveal = document.getElementById(&#39;wishReveal&#39;);<br/>    let candleBlown = false;<br/><br/>    blowBtn.addEventListener(&#39;click&#39;, () =&gt; {<br/>      spawnConfetti(30);<br/>      if (!candleBlown) {<br/>        flames.forEach(f =&gt; f.classList.add(&#39;blown&#39;));<br/>        candleBlown = true;<br/>        blowBtn.textContent = &#39;Nyalakan Lilin 20 Lagi 🕯️&#39;;<br/>        wishReveal.textContent = &#39;Semoga harapanmu pelan-pelan jadi nyata di usia ke-20 ini, Ayra.&#39;;<br/>      } else {<br/>        flames.forEach(f =&gt; f.classList.remove(&#39;blown&#39;));<br/>        candleBlown = false;<br/>        blowBtn.textContent = &#39;Tiup Lilinnya ✨&#39;;<br/>        wishReveal.textContent = &#39;Lilin 20 nyala lagi—boleh bikin satu harapan lagi!&#39;;<br/>      }<br/>    });<br/><br/>    // Sesi 9: Kapsul harapan<br/>    function saveWishCapsule() {<br/>      const input = document.getElementById(&#39;wishInput&#39;);<br/>      const box = document.getElementById(&#39;savedCapsule&#39;);<br/>      const text = input.value.trim();<br/><br/>      if (!text) {<br/>        box.textContent = &#39;Tulis dulu satu harapan kecilmu di kotak atas ya 🌸&#39;;<br/>        box.classList.add(&#39;show&#39;);<br/>        return;<br/>      }<br/><br/>      box.innerHTML = `&lt;strong&gt;✨ Harapan Ayra Tersimpan:&lt;/strong&gt;&lt;br&gt;&quot;${escapeHtml(text)}&quot;&lt;br&gt;&lt;span style=&quot;font-size:0.78rem;opacity:0.85;&quot;&gt;Semoga semesta pelan-pelan mengaminkan yang satu ini.&lt;/span&gt;`;<br/>      box.classList.add(&#39;show&#39;);<br/>      spawnConfetti(18);<br/>    }<br/><br/>    function escapeHtml(str) {<br/>      return str<br/>        .replace(/&amp;/g, &#39;&amp;amp;&#39;)<br/>        .replace(/&lt;/g, &#39;&amp;lt;&#39;)<br/>        .replace(/&gt;/g, &#39;&amp;gt;&#39;)<br/>        .replace(/&quot;/g, &#39;&amp;quot;&#39;);<br/>    }<br/><br/>    // Sesi 10: Skala salting<br/>    const saltingReplies = [<br/>      &#39;Haha, ngelesnya halus banget—tapi nggak apa-apa, yang penting udah dibaca sampai akhir 😉&#39;,<br/>      &#39;Nah kan, ketahuan senyum-senyum sendiri. Aman kok, nggak ada yang lihat 😆🤗😜.&#39;,<br/>      &#39;Cie, mulai salting tipis. Anggap aja pemanasan buat hari spesialmu 💜&#39;,<br/>      &#39;yeaayyy Alhamdulillah berhasil,🥰aku sendiri buat ini aja salting juga🫣&#39;<br/>    ];<br/><br/>    function pickSalting(idx, btn) {<br/>      document.querySelectorAll(&#39;.salting-btn&#39;).forEach(b =&gt; b.classList.remove(&#39;active-scale&#39;));<br/>      btn.classList.add(&#39;active-scale&#39;);<br/>      document.getElementById(&#39;saltingReply&#39;).textContent = saltingReplies[idx];<br/>      if (idx &gt;= 2) spawnConfetti(16);<br/>    }<br/><br/>    function spawnConfetti(count = 26) {<br/>      const colors = [&#39;#f472b6&#39;, &#39;#c084fc&#39;, &#39;#fbcfe8&#39;, &#39;#e9d5ff&#39;, &#39;#f9a8d4&#39;];<br/>      for (let i = 0; i &lt; count; i++) {<br/>        const piece = document.createElement(&#39;span&#39;);<br/>        piece.className = &#39;confetti-piece&#39;;<br/>        piece.style.left = (12 + Math.random() * 76) + &#39;vw&#39;;<br/>        piece.style.background = colors[i % colors.length];<br/>        piece.style.setProperty(&#39;--x&#39;, ((Math.random() - 0.5) * 140) + &#39;px&#39;);<br/>        piece.style.setProperty(&#39;--dur&#39;, (1.8 + Math.random() * 1.2) + &#39;s&#39;);<br/>        document.body.appendChild(piece);<br/>        setTimeout(() =&gt; piece.remove(), 3100);<br/>      }<br/>    }<br/>  &lt;/script&gt;<br/>&lt;/body&gt;<br/>&lt;/html&gt;<br/></body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selamat Ulang Tahun, Ayra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-top: #fdf2f8;
+      --bg-mid: #f3e8ff;
+      --bg-bot: #fce7f3;
+      --card-bg: rgba(255, 255, 255, 0.86);
+      --text-main: #47293d;
+      --text-soft: #78526b;
+      --pink-deep: #ec4899;
+      --lilac-deep: #a855f7;
+      --border-soft: rgba(216, 180, 254, 0.6);
+      --shadow-soft: 0 20px 44px -16px rgba(139, 92, 246, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100dvh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 15% 12%, rgba(244, 114, 182, 0.24), transparent 45%),
+        radial-gradient(circle at 85% 22%, rgba(192, 132, 252, 0.28), transparent 48%),
+        linear-gradient(165deg, var(--bg-top) 0%, var(--bg-mid) 52%, var(--bg-bot) 100%);
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+    }
+
+    /* Kelopak bunga jatuh */
+    .petals-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .petal {
+      position: absolute;
+      top: -40px;
+      width: 14px;
+      height: 18px;
+      border-radius: 75% 15% 75% 15%;
+      opacity: 0.72;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }
+      12% { opacity: 0.72; }
+      88% { opacity: 0.72; }
+      100% { transform: translate3d(var(--drift, 35px), 105vh, 0) rotate(320deg); opacity: 0; }
+    }
+
+    /* Layer kembang api */
+    .fireworks-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 25;
+    }
+
+    .spark {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px currentColor;
+      animation: burst 1.15s cubic-bezier(0.16, 0.88, 0.32, 1) forwards;
+    }
+
+    @keyframes burst {
+      0% { transform: translate(0, 0) scale(1.15); opacity: 1; }
+      75% { opacity: 0.95; }
+      100% { transform: translate(var(--tx, 60px), var(--ty, -60px)) scale(0.2); opacity: 0; }
+    }
+
+    /* Layar Awalan (Splash / Intro Gate) */
+    .intro-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 35;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at 22% 20%, rgba(244, 114, 182, 0.3), transparent 50%),
+        radial-gradient(circle at 80% 78%, rgba(192, 132, 252, 0.34), transparent 52%),
+        linear-gradient(160deg, #fdf2f8 0%, #f3e8ff 55%, #fce7f3 100%);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .intro-gate.fade-out {
+      opacity: 0;
+      transform: scale(1.03);
+      pointer-events: none;
+    }
+
+    .intro-box {
+      width: 100%;
+      max-width: 390px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(216, 180, 254, 0.65);
+      border-radius: 28px;
+      padding: 30px 22px;
+      box-shadow: 0 22px 48px -16px rgba(139, 92, 246, 0.26);
+    }
+
+    .intro-salam {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #7e2f68;
+      margin-bottom: 10px;
+    }
+
+    .intro-kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8f4779;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .intro-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.15rem;
+      line-height: 1.1;
+      color: #3d1f35;
+      margin-bottom: 6px;
+    }
+
+    .intro-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.18rem;
+      color: #8e3b76;
+      margin-bottom: 14px;
+    }
+
+    .intro-desc {
+      font-size: 0.88rem;
+      line-height: 1.62;
+      color: var(--text-soft);
+      margin-bottom: 20px;
+    }
+
+    .preparing-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0 4px;
+    }
+
+    .preparing-state.active {
+      display: flex;
+    }
+
+    .ring-loader {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 3px solid rgba(216, 180, 254, 0.45);
+      border-top-color: var(--pink-deep);
+      border-right-color: var(--lilac-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #6b2859;
+      animation: spinRing 1s linear infinite;
+    }
+
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+
+    .preparing-text {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #7d3e6b;
+      font-weight: 600;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    /* Indikator 10 sesi */
+    .step-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .step-dots {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .step-dot {
+      width: 8px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(168, 85, 247, 0.22);
+      transition: width 0.25s ease, background 0.25s ease;
+    }
+
+    .step-dot.active {
+      width: 18px;
+      background: linear-gradient(90deg, var(--pink-deep), var(--lilac-deep));
+    }
+
+    .step-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #7d3e6b;
+      white-space: nowrap;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-soft);
+      border-radius: 28px;
+      padding: 24px 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .page {
+      display: none;
+      animation: pageIn 0.34s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #8b3a72;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(236, 72, 153, 0.24);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    h1, .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.86rem, 7.4vw, 2.3rem);
+      line-height: 1.1;
+      font-weight: 600;
+      color: #3d1f35;
+      margin-bottom: 8px;
+    }
+
+    .full-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #8e3b76;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .lead, .page-desc {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text-soft);
+    }
+
+    .btn-spark {
+      margin-top: 14px;
+      width: 100%;
+      border: 1.5px solid rgba(236, 72, 153, 0.42);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(253, 242, 248, 0.92));
+      color: #852b69;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .floral-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 16px 0;
+      color: #b05c98;
+      font-size: 13px;
+    }
+
+    .floral-divider::before,
+    .floral-divider::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.35), transparent);
+    }
+
+    .affection-note {
+      padding: 14px 15px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(253, 242, 248, 0.82));
+      border: 1px solid rgba(216, 180, 254, 0.45);
+      font-size: 0.88rem;
+      line-height: 1.62;
+      color: #5b2b4d;
+    }
+
+    /* Petik Bunga */
+    .garden-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 16px 0 14px;
+    }
+
+    .flower-btn {
+      aspect-ratio: 1 / 1;
+      border-radius: 20px;
+      border: 1.5px solid rgba(216, 180, 254, 0.58);
+      background: rgba(255, 255, 255, 0.78);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .flower-btn:active { transform: scale(0.94); }
+    .flower-btn.picked {
+      background: linear-gradient(155deg, rgba(251, 207, 232, 0.82), rgba(233, 213, 255, 0.88));
+      border-color: rgba(236, 72, 153, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .flower-icon { font-size: 1.5rem; line-height: 1; }
+    .flower-label { font-size: 0.68rem; font-weight: 600; color: #7c3a69; }
+
+    .soft-bubble {
+      min-height: 62px;
+      padding: 13px 15px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px dashed rgba(168, 85, 247, 0.38);
+      font-size: 0.87rem;
+      line-height: 1.56;
+      color: #552848;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Pilih Bunga Favorit */
+    .fav-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      margin: 14px 0;
+    }
+
+    .fav-option {
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1.5px solid rgba(216, 180, 254, 0.55);
+      background: rgba(255, 255, 255, 0.78);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: inherit;
+      color: var(--text-main);
+    }
+
+    .fav-option.selected {
+      background: linear-gradient(135deg, rgba(251, 207, 232, 0.72), rgba(233, 213, 255, 0.82));
+      border-color: rgba(236, 72, 153, 0.58);
+    }
+
+    .fav-emoji { font-size: 1.35rem; flex-shrink: 0; }
+    .fav-name { font-size: 0.88rem; font-weight: 600; }
+    .fav-sub { font-size: 0.76rem; color: var(--text-soft); }
+
+    /* Tebak-tebakan */
+    .quiz-block { margin-top: 14px; }
+    .quiz-block + .quiz-block {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(192, 132, 252, 0.28);
+    }
+
+    .quiz-q {
+      font-size: 0.87rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      line-height: 1.48;
+    }
+
+    .quiz-choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .choice-btn {
+      border: 1px solid rgba(192, 132, 252, 0.42);
+      background: rgba(255, 255, 255, 0.82);
+      color: #6b2e5b;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 10px 10px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .choice-btn.picked-choice {
+      background: linear-gradient(135deg, var(--pink-deep), var(--lilac-deep));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .btn-reveal-ans {
+      margin-top: 8px;
+      border: 1px dashed rgba(236, 72, 153, 0.5);
+      background: rgba(255, 255, 255, 0.84);
+      color: #832a68;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .quiz-reply {
+      margin-top: 8px;
+      font-size: 0.84rem;
+      line-height: 1.52;
+      color: #5f244f;
+      font-weight: 500;
+      min-height: 18px;
+    }
+
+    /* Mini-Game Ketuk Cinta / Bunga Melayang */
+    .catch-arena {
+      position: relative;
+      height: 196px;
+      margin: 14px 0 12px;
+      border-radius: 22px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.72), rgba(243, 232, 255, 0.78));
+      border: 1.5px solid rgba(216, 180, 254, 0.6);
+      overflow: hidden;
+    }
+
+    .catch-hud {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #7d3668;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .floating-item {
+      position: absolute;
+      border: none;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(236, 72, 153, 0.35);
+      border-radius: 999px;
+      width: 44px;
+      height: 44px;
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 16px -8px rgba(168, 85, 247, 0.45);
+      transition: transform 0.14s ease, opacity 0.2s ease;
+    }
+
+    .floating-item:active { transform: scale(0.86); }
+
+    /* Pilih 1 Amplop Misteri */
+    .envelope-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0 14px;
+    }
+
+    .envelope-btn {
+      border: 1.5px solid rgba(216, 180, 254, 0.62);
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 20px;
+      padding: 16px 8px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      color: var(--text-main);
+      transition: transform 0.18s ease, background 0.25s ease;
+    }
+
+    .envelope-btn:active { transform: scale(0.95); }
+    .envelope-btn.opened {
+      background: linear-gradient(155deg, rgba(251, 207, 232, 0.85), rgba(233, 213, 255, 0.9));
+      border-color: rgba(236, 72, 153, 0.6);
+    }
+
+    .env-icon { font-size: 1.65rem; }
+    .env-title { font-size: 0.78rem; font-weight: 600; }
+
+    /* Kue & Lilin Angka 20 */
+    .cake-center { text-align: center; }
+
+    .cake-stage {
+      position: relative;
+      height: 146px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin: 10px 0 16px;
+    }
+
+    .cake {
+      position: relative;
+      width: 164px;
+      height: 86px;
+      border-radius: 18px 18px 14px 14px;
+      background: linear-gradient(180deg, #fbcfe8 0%, #f472b6 100%);
+      box-shadow: 0 12px 24px -10px rgba(236, 72, 153, 0.45);
+      border: 2px solid rgba(255, 255, 255, 0.88);
+    }
+
+    .icing {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 26px;
+      background: linear-gradient(180deg, #fff8fc 0%, #f3e8ff 100%);
+      border-radius: 16px 16px 12px 12px;
+    }
+
+    .number-candles {
+      position: absolute;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .num-candle {
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.3rem;
+      font-weight: 600;
+      line-height: 1;
+      padding: 2px 6px 0;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #f5d0fe 0%, #f472b6 55%, #a855f7 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 2px 4px rgba(168, 85, 247, 0.25));
+    }
+
+    .flame {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 18px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: radial-gradient(circle at 50% 65%, #fffbeb 15%, #fbbf24 55%, #f97316 100%);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.92);
+      animation: flicker 0.45s ease-in-out infinite alternate;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .flame.blown {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.3);
+      animation: none;
+    }
+
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(0.95) rotate(-2deg); }
+      to { transform: translateX(-50%) scale(1.06) rotate(2deg); }
+    }
+
+    .wish-reveal {
+      margin-top: 12px;
+      font-size: 0.87rem;
+      color: #6b2d5c;
+      min-height: 22px;
+      font-weight: 500;
+    }
+
+    /* Kapsul Harapan */
+    .wish-textarea {
+      width: 100%;
+      margin-top: 14px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1.5px solid rgba(192, 132, 252, 0.45);
+      background: rgba(255, 255, 255, 0.88);
+      font-family: inherit;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      resize: none;
+      outline: none;
+    }
+
+    .wish-textarea:focus { border-color: var(--pink-deep); }
+
+    .saved-capsule {
+      display: none;
+      margin-top: 12px;
+      padding: 13px 15px;
+      border-radius: 18px;
+      background: linear-gradient(150deg, rgba(251, 207, 232, 0.58), rgba(233, 213, 255, 0.68));
+      border: 1px solid rgba(236, 72, 153, 0.36);
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: #4f2342;
+    }
+
+    .saved-capsule.show { display: block; }
+
+    /* Skala Salting & Surat Penutup */
+    .salting-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 12px 0 10px;
+    }
+
+    .salting-btn {
+      border: 1px solid rgba(192, 132, 252, 0.45);
+      background: rgba(255, 255, 255, 0.84);
+      color: #6a2858;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 9px 10px;
+      border-radius: 13px;
+      cursor: pointer;
+    }
+
+    .salting-btn.active-scale {
+      background: linear-gradient(135deg, var(--pink-deep), var(--lilac-deep));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .salting-reply {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: #5e224e;
+      font-weight: 500;
+      min-height: 20px;
+      margin-bottom: 12px;
+    }
+
+    .mini-letter {
+      padding-top: 12px;
+      border-top: 1px solid rgba(192, 132, 252, 0.28);
+      font-size: 0.88rem;
+      line-height: 1.62;
+      color: var(--text-main);
+    }
+
+    .sign-off {
+      margin-top: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #8b3a72;
+    }
+
+    /* Navigasi */
+    .btn-primary {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--pink-deep) 0%, var(--lilac-deep) 100%);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.91rem;
+      font-weight: 600;
+      padding: 13px 16px;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px -10px rgba(168, 85, 247, 0.55);
+      transition: transform 0.16s ease;
+    }
+
+    .btn-primary:active { transform: scale(0.98); }
+
+    .nav-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn-back {
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      background: rgba(255, 255, 255, 0.78);
+      color: #68365b;
+      font-family: inherit;
+      font-size: 0.87rem;
+      font-weight: 600;
+      padding: 12px 14px;
+      border-radius: 15px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-row .btn-primary { flex: 1; }
+
+    .confetti-piece {
+      position: fixed;
+      top: -12px;
+      width: 9px;
+      height: 14px;
+      border-radius: 3px;
+      pointer-events: none;
+      z-index: 40;
+      animation: confettiDrop var(--dur, 2.2s) ease-out forwards;
+    }
+
+    @keyframes confettiDrop {
+      0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate3d(var(--x, 0px), 100vh, 0) rotate(540deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="petals-layer" id="petalsLayer" aria-hidden="true"></div>
+  <div class="fireworks-layer" id="fireworksLayer" aria-hidden="true"></div>
+
+  <!-- Audio tetap berjalan di latar belakang meski berpindah sesi -->
+  <audio id="bgAudio" src="honeybee.mp3" preload="metadata" loop></audio>
+
+  <!-- LAYAR AWALAN SEBELUM MASUK SESI -->
+  <div class="intro-gate" id="introGate">
+    <div class="intro-box">
+      <div id="introContent">
+        <div class="intro-salam">Assalamu'alaikum wr. wb.</div>
+        <div class="intro-kicker">A Little Surprise Made With Love</div>
+        <h2 class="intro-title">Buat Ayra</h2>
+        <div class="intro-sub">Ayra Tsania Hibatullah Azzulfikar</div>
+        <p class="intro-desc">
+          ada kejutan kecil yang tulus di buat oleh ben khusus untukmu orang yang dia sayangi
+        </p>
+        <button class="btn-primary" id="startSurpriseBtn" type="button">
+          klik ini sayang🤗
+        </button>
+      </div>
+
+      <div class="preparing-state" id="preparingState">
+        <div class="ring-loader">❀</div>
+        <div class="preparing-text">Preparing Something For You</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell">
+    <div class="step-bar">
+      <div class="step-dots" id="stepDots">
+        <span class="step-dot active"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+      </div>
+      <div class="step-label" id="stepLabel">Sesi 1 dari 10</div>
+    </div>
+
+    <main class="card">
+      <!-- SESI 1 -->
+      <section class="page active" id="page-0">
+        <div class="tag">🎆 Selamat Ulang Tahun 🎆</div>
+        <h1>Untuk Hari Spesialmu</h1>
+        <div class="full-name">Ayra Tsania Hibatullah Azzulfikar</div>
+        <p class="lead">
+          Selamat bertambah usia ya, Ayra. Ada 10 sesi kecil yang disiapin pelan-pelan buat nemenin harimu.
+        </p>
+
+        <div class="floral-divider">✿ ❀ ✿</div>
+
+        <div class="affection-note">
+          Setiap detail di sini disusun pelan-pelan karena kamu berarti banget buat aku. Yuk mulai dari taman bunga kecil buatmu dulu ya, sayang.
+        </div>
+
+        <button class="btn-spark" type="button" onclick="launchFireworksShow()">
+          Nyalakan Kembang Api Lagi 🎆
+        </button>
+
+        <div class="nav-row">
+          <button class="btn-primary" type="button" onclick="goToPage(1)">
+            Ke Sesi Petik Bunga, Sayang 🌷 →
+          </button>
+        </div>
+      </section>
+
+      <!-- SESI 2 -->
+      <section class="page" id="page-1">
+        <div class="tag">🌷 Sesi 2 • Taman Kecil</div>
+        <h2 class="page-title">Petik Bunganya Dulu</h2>
+        <p class="page-desc">Ketuk bunga-bunga ini satu per satu buat ngintip pesannya.</p>
+
+        <div class="garden-row">
+          <button class="flower-btn" type="button" onclick="pickFlower(0, this)">
+            <span class="flower-icon">🌷</span>
+            <span class="flower-label">Bunga 1</span>
+          </button>
+          <button class="flower-btn" type="button" onclick="pickFlower(1, this)">
+            <span class="flower-icon">🌸</span>
+            <span class="flower-label">Bunga 2</span>
+          </button>
+          <button class="flower-btn" type="button" onclick="pickFlower(2, this)">
+            <span class="flower-icon">🪻</span>
+            <span class="flower-label">Bunga 3</span>
+          </button>
+          <button class="flower-btn" type="button" onclick="pickFlower(3, this)">
+            <span class="flower-icon">🌺</span>
+            <span class="flower-label">Bunga 4</span>
+          </button>
+        </div>
+
+        <div class="soft-bubble" id="gardenBubble">Ketuk salah satu bunga di atas buat ngintip isinya...</div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(0)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(2)">Lanjut →</button>
+        </div>
+      </section>
+
+      <!-- SESI 3 -->
+      <section class="page" id="page-2">
+        <div class="tag">💐 Sesi 3 • Pilihanmu</div>
+        <h2 class="page-title">Pilih Bunga Favoritmu</h2>
+        <p class="page-desc">Dari tiga bunga ini, mana yang paling bikin kamu senyum pas lihat?</p>
+
+        <div class="fav-grid">
+          <button class="fav-option" type="button" onclick="chooseFavFlower(0, this)">
+            <span class="fav-emoji">🌷</span>
+            <div>
+              <div class="fav-name">Pink Tulip</div>
+              <div class="fav-sub">Lembut, kalem, tapi manisnya nempel</div>
+            </div>
+          </button>
+          <button class="fav-option" type="button" onclick="chooseFavFlower(1, this)">
+            <span class="fav-emoji">🪻</span>
+            <div>
+              <div class="fav-name">Lavender Ungu</div>
+              <div class="fav-sub">Tenang, hangat, dan bikin betah</div>
+            </div>
+          </button>
+          <button class="fav-option" type="button" onclick="chooseFavFlower(2, this)">
+            <span class="fav-emoji">🌸</span>
+            <div>
+              <div class="fav-name">Sakura Pastel</div>
+              <div class="fav-sub">Manis setiap kali hadir di pandangan</div>
+            </div>
+          </button>
+        </div>
+
+        <div class="soft-bubble" id="favReply">Pilih satu bunga di atas ya...</div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(1)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(3)">Lanjut →</button>
+        </div>
+      </section>
+
+      <!-- SESI 4 -->
+      <section class="page" id="page-3">
+        <div class="tag">✨ Sesi 4 • Tebak Dikit</div>
+        <h2 class="page-title">Coba Jawab Santai</h2>
+        <p class="page-desc">Bukan ujian kok—cuma mau nebak suasana hatimu hari ini.</p>
+
+        <div class="quiz-block">
+          <div class="quiz-q">1. Kalau lagi capek atau bad mood, kamu lebih milih:</div>
+          <div class="quiz-choices">
+            <button class="choice-btn" type="button" onclick="answerQuiz(1, 0, this)">Dengerin lagu / me-time</button>
+            <button class="choice-btn" type="button" onclick="answerQuiz(1, 1, this)">Cerita atau jajan manis/pedes</button>
+          </div>
+          <div class="quiz-reply" id="quizReply1"></div>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-q">2. Di hari ulang tahun ini, hadiah kecil yang paling oke:</div>
+          <div class="quiz-choices">
+            <button class="choice-btn" type="button" onclick="answerQuiz(2, 0, this)">Bunga + ucapan tulus</button>
+            <button class="choice-btn" type="button" onclick="answerQuiz(2, 1, this)">Waktu &amp; perhatian pelan-pelan</button>
+          </div>
+          <div class="quiz-reply" id="quizReply2"></div>
+        </div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(2)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(4)">Lanjut →</button>
+        </div>
+      </section>
+
+      <!-- SESI 5 -->
+      <section class="page" id="page-4">
+        <div class="tag">💘 Sesi 5 • Gombal Tipis-Tipis</div>
+        <h2 class="page-title">Tebak Dulu Kalau Bisa</h2>
+        <p class="page-desc">Coba tebak di dalam hati dulu ya. Kalau nyerah, klik tombol jawabannya.</p>
+
+        <div class="quiz-block">
+          <div class="quiz-q">1. Bunga apa yang nggak pernah layu meski nggak disiram tiap hari?</div>
+          <button class="btn-reveal-ans" type="button" onclick="revealRiddle(1)">Lihat Jawaban 1 💡</button>
+          <div class="quiz-reply" id="riddleReply1"></div>
+        </div>
+
+        <div class="quiz-block">
+          <div class="quiz-q">2. Bedanya ulang tahun kamu sama bunga pink-ungu apa?</div>
+          <button class="btn-reveal-ans" type="button" onclick="revealRiddle(2)">Lihat Jawaban 2 💡</button>
+          <div class="quiz-reply" id="riddleReply2"></div>
+        </div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(3)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(5)">Lanjut ke Mini-Game →</button>
+        </div>
+      </section>
+
+      <!-- SESI 6: Mini-Game Ketuk Cinta / Bunga Melayang -->
+      <section class="page" id="page-5">
+        <div class="tag">🌸 Sesi 6 • Mini-Game</div>
+        <h2 class="page-title">Ketuk 5 Bunga &amp; Hati</h2>
+        <p class="page-desc">Coba ketuk 5 ikon yang melayang di kotak ini ya.</p>
+
+        <div class="catch-arena" id="catchArena">
+          <div class="catch-hud">
+            <span id="catchScore">Terketuk: 0 / 5</span>
+            <span>Santai aja</span>
+          </div>
+        </div>
+
+        <div class="soft-bubble" id="catchMsg">Ketuk bunga atau hati yang muncul di kotak atas...</div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(4)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(6)">Lanjut →</button>
+        </div>
+      </section>
+
+      <!-- SESI 7: Pilih 1 Amplop Misteri -->
+      <section class="page" id="page-6">
+        <div class="tag">✉️ Sesi 7 • Amplop Misteri</div>
+        <h2 class="page-title">Pilih Satu Amplop</h2>
+        <p class="page-desc">Tiap amplop nyimpen isi yang beda. Coba pilih salah satu buat dibuka.</p>
+
+        <div class="envelope-row">
+          <button class="envelope-btn" type="button" onclick="openEnvelope(0, this)">
+            <span class="env-icon">💌</span>
+            <span class="env-title">Amplop Pink</span>
+          </button>
+          <button class="envelope-btn" type="button" onclick="openEnvelope(1, this)">
+            <span class="env-icon">💜</span>
+            <span class="env-title">Amplop Lilac</span>
+          </button>
+          <button class="envelope-btn" type="button" onclick="openEnvelope(2, this)">
+            <span class="env-icon">🌷</span>
+            <span class="env-title">Amplop Bunga</span>
+          </button>
+        </div>
+
+        <div class="soft-bubble" id="envelopeMsg">Belum ada amplop yang dibuka...</div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(5)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(7)">Lanjut ke Kue →</button>
+        </div>
+      </section>
+
+      <!-- SESI 8: Kue & Lilin Angka 20 -->
+      <section class="page cake-center" id="page-7">
+        <div class="tag">🎂 Sesi 8 • Tiup Lilin</div>
+        <h2 class="page-title">Buat Harapanmu Dulu</h2>
+        <p class="page-desc">Bayangin satu harapan baik di usia baru ini, lalu tiup lilinnya.</p>
+
+        <div class="cake-stage">
+          <div class="number-candles" aria-label="Lilin angka 20">
+            <div class="num-candle">
+              <div class="flame flame-item"></div>
+              2
+            </div>
+            <div class="num-candle">
+              <div class="flame flame-item"></div>
+              0
+            </div>
+          </div>
+          <div class="cake">
+            <div class="icing"></div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="blowBtn" type="button">Tiup Lilinnya ✨</button>
+        <div class="wish-reveal" id="wishReveal"></div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(6)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(8)">Lanjut →</button>
+        </div>
+      </section>
+
+      <!-- SESI 9: Kapsul Harapan -->
+      <section class="page" id="page-8">
+        <div class="tag">🫙 Sesi 9 • Kapsul Harapan</div>
+        <h2 class="page-title">Simpan Satu Harapanmu</h2>
+        <p class="page-desc">
+          Tulis satu hal yang pengen banget kamu capai atau rasain di tahun ini. Cuma kamu yang baca di layar ini.
+        </p>
+
+        <textarea
+          class="wish-textarea"
+          id="wishInput"
+          rows="3"
+          placeholder="Contoh: Semoga tahun ini hatiku makin tenang dan semua urusanku dilancarkan..."
+        ></textarea>
+
+        <button class="btn-primary" style="margin-top: 10px;" type="button" onclick="saveWishCapsule()">
+          Simpan ke Kapsul Harapan 💜
+        </button>
+
+        <div class="saved-capsule" id="savedCapsule"></div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(7)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(9)">Sesi Terakhir →</button>
+        </div>
+      </section>
+
+      <!-- SESI 10: Skala Salting & Surat Penutup -->
+      <section class="page" id="page-9">
+        <div class="tag">💜 Sesi 10 • Penutup dari Ben</div>
+        <h2 class="page-title">Jujur, Lagi Salting Seberapa?</h2>
+        <p class="page-desc">Pilih reaksi yang paling pas setelah ngecek semuanya:</p>
+
+        <div class="salting-grid">
+          <button class="salting-btn" type="button" onclick="pickSalting(0, this)">Biasa aja (bohong dikit)</button>
+          <button class="salting-btn" type="button" onclick="pickSalting(1, this)">Senyum-senyum sendiri</button>
+          <button class="salting-btn" type="button" onclick="pickSalting(2, this)">Mulai salting tipis</button>
+          <button class="salting-btn" type="button" onclick="pickSalting(3, this)">salting brutal🤭🥰🫣</button>
+        </div>
+
+        <div class="salting-reply" id="saltingReply"></div>
+
+        <div class="mini-letter">
+          Selamat ulang tahun, Ayra. Semoga usia baru ini ngebawa banyak kabar baik dan bikin kamu makin bahagia. Aku di sini terus berusaha pelan-pelan ngambil hatimu dengan tulus.
+          <div class="sign-off">— Ben</div>
+        </div>
+
+        <div class="nav-row">
+          <button class="btn-back" type="button" onclick="goToPage(8)">← Kembali</button>
+          <button class="btn-primary" type="button" onclick="goToPage(0)">Ulang dari Awal ↺</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Kelopak bunga jatuh
+    const petalsLayer = document.getElementById('petalsLayer');
+    const petalColors = [
+      'rgba(244, 114, 182, 0.58)',
+      'rgba(251, 207, 232, 0.78)',
+      'rgba(192, 132, 252, 0.55)',
+      'rgba(233, 213, 255, 0.75)'
+    ];
+
+    for (let i = 0; i < 16; i++) {
+      const petal = document.createElement('span');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + '%';
+      petal.style.background = petalColors[i % petalColors.length];
+      petal.style.animationDuration = (7 + Math.random() * 6) + 's';
+      petal.style.animationDelay = (-Math.random() * 10) + 's';
+      petal.style.setProperty('--drift', ((Math.random() - 0.5) * 90) + 'px');
+      const scale = 0.75 + Math.random() * 0.65;
+      petal.style.transform = `scale(${scale})`;
+      petalsLayer.appendChild(petal);
+    }
+
+    // Kembang api
+    const fireworksLayer = document.getElementById('fireworksLayer');
+    const sparkColors = ['#ec4899', '#a855f7', '#f472b6', '#c084fc', '#fbbf24', '#f9a8d4'];
+
+    function spawnFireworkBurst(cx, cy) {
+      const count = 22;
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.25;
+        const dist = 52 + Math.random() * 58;
+        const tx = Math.cos(angle) * dist;
+        const ty = Math.sin(angle) * dist;
+
+        const spark = document.createElement('span');
+        spark.className = 'spark';
+        spark.style.left = cx + 'px';
+        spark.style.top = cy + 'px';
+        spark.style.color = sparkColors[i % sparkColors.length];
+        spark.style.background = sparkColors[i % sparkColors.length];
+        spark.style.setProperty('--tx', tx.toFixed(1) + 'px');
+        spark.style.setProperty('--ty', ty.toFixed(1) + 'px');
+        fireworksLayer.appendChild(spark);
+
+        setTimeout(() => spark.remove(), 1200);
+      }
+    }
+
+    function launchFireworksShow() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      spawnFireworkBurst(w * 0.26, h * 0.28);
+      setTimeout(() => spawnFireworkBurst(w * 0.74, h * 0.24), 220);
+      setTimeout(() => spawnFireworkBurst(w * 0.52, h * 0.36), 440);
+    }
+
+    // Musik (dipicu saat klik tombol awalan dan jalan terus saat pindah sesi)
+    const audio = document.getElementById('bgAudio');
+    let isPlaying = false;
+
+    async function playMusicFromStart() {
+      if (isPlaying) return true;
+      try {
+        await audio.play();
+        isPlaying = true;
+        return true;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    // Layar Awalan + Transisi Preparing + Auto-play lagu
+    const introGate = document.getElementById('introGate');
+    const introContent = document.getElementById('introContent');
+    const preparingState = document.getElementById('preparingState');
+    const startSurpriseBtn = document.getElementById('startSurpriseBtn');
+
+    startSurpriseBtn.addEventListener('click', async () => {
+      await playMusicFromStart();
+      introContent.style.display = 'none';
+      preparingState.classList.add('active');
+
+      setTimeout(() => {
+        introGate.classList.add('fade-out');
+        launchFireworksShow();
+      }, 1150);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initFloatingCatchGame();
+    });
+
+    // Navigasi 10 sesi
+    const pages = document.querySelectorAll('.page');
+    const dots = document.querySelectorAll('.step-dot');
+    const stepLabel = document.getElementById('stepLabel');
+
+    function goToPage(index) {
+      pages.forEach((p, i) => p.classList.toggle('active', i === index));
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      stepLabel.textContent = `Sesi ${index + 1} dari ${pages.length}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (index === 0) launchFireworksShow();
+    }
+
+    // Sesi 2: Petik bunga
+    const flowerMessages = [
+      '🌷 Bunga 1: Jujur, kamu tuh gampang banget bikin kepikiran seharian.,aku udah kayak tergila-gila sama kamu wkwkwkw',
+      '🌸 Bunga 2: Kalau lagi capek, semoga pesan kecil ini bikin sedikit enakan.',
+      '🪻 Bunga 3: Suka banget sama vibe-mu—nggak neko-neko udah bikin srek,rill bidadari yang berbeda dari lainnya😍.',
+      '🌺 Bunga 4: Selamat ulang tahun, Ayra. Semoga makin banyak hal baik datang ke kamu!'
+    ];
+    const pickedSet = new Set();
+    const gardenBubble = document.getElementById('gardenBubble');
+
+    function pickFlower(idx, btn) {
+      btn.classList.add('picked');
+      pickedSet.add(idx);
+      gardenBubble.textContent = pickedSet.size === flowerMessages.length
+        ? flowerMessages[idx] + ' (Semua bunga udah kepetik 💜)'
+        : flowerMessages[idx];
+    }
+
+    // Sesi 3: Pilih bunga favorit
+    const favMessages = [
+      '🌷 Pink Tulip: Pas banget sama kamu—kelihatannya kalem, tapi sekalinya dikenal bikin susah lupa.',
+      '🪻 Lavender Ungu: Cocok buat kamu yang kehadirannya sering bikin suasana terasa lebih tenang.',
+      '🌸 Sakura Pastel: Manisnya nggak berlebihan, tapi selalu berhasil bikin orang di dekatmu senyum.'
+    ];
+    const favReply = document.getElementById('favReply');
+
+    function chooseFavFlower(idx, btn) {
+      document.querySelectorAll('.fav-option').forEach(el => el.classList.remove('selected'));
+      btn.classList.add('selected');
+      favReply.textContent = favMessages[idx];
+    }
+
+    // Sesi 4: Tebak-tebakan ringan
+    function answerQuiz(qNum, choiceIdx, btn) {
+      const parent = btn.parentElement;
+      parent.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('picked-choice'));
+      btn.classList.add('picked-choice');
+
+      if (qNum === 1) {
+        document.getElementById('quizReply1').textContent = choiceIdx === 0
+          ? 'Noted! Kalau lagi butuh ruang tenang, aku siap nemenin pelan-pelan tanpa ganggu.'
+          : 'Noted! Lain kali kalau lagi capek, tinggal kode aja—siap dengerin atau bawain yang manis/pedes.';
+      } else {
+        document.getElementById('quizReply2').textContent = choiceIdx === 0
+          ? 'Pas banget, versi digitalnya udah ada di sini—semoga nyampe ke hatimu ya.'
+          : 'Tenang aja, yang satu itu lagi aku usahain pelan-pelan setiap hari 😉';
+      }
+    }
+
+    // Sesi 5: Tebak-tebakan gombal tipis-tipis
+    function revealRiddle(num) {
+      if (num === 1) {
+        document.getElementById('riddleReply1').textContent =
+          'Bunga yang tumbuh di hati setiap kali inget senyum kamu. Eaaa tipis-tipis dulu 🌸';
+      } else {
+        document.getElementById('riddleReply2').textContent =
+          'Kalau bunga pink-ungu bikin halaman ini kelihatan manis, ulang tahun kamu bikin hari ini jadi spesial buat aku 💜';
+      }
+    }
+
+    // Sesi 6: Mini-Game Ketuk Bunga & Hati
+    const catchArena = document.getElementById('catchArena');
+    const catchScoreEl = document.getElementById('catchScore');
+    const catchMsgEl = document.getElementById('catchMsg');
+    let caughtCount = 0;
+    const catchTarget = 5;
+    const catchCompliments = [
+      'Kena satu! Ahaaayyyy Pelan-pelan mulai keambil ya 🌸',
+      'Dua! Kayaknya kamu mulai senyum nih xixi👀',
+      'Tiga! Satu per satu, persis kayak cara aku mendekat pelan-pelan 💜',
+      'Empat! Tinggal satu lagi—jangan sampai lolos!',
+      'Lima tercapai! Target kecil hari ini beres, makasih udah mainin sayangg ✨'
+    ];
+
+    function initFloatingCatchGame() {
+      const icons = ['🌷', '🌸', '🪻', '💜', '✨'];
+      for (let i = 0; i < 6; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'floating-item';
+        btn.textContent = icons[i % icons.length];
+        moveFloatingItem(btn);
+
+        btn.addEventListener('click', () => {
+          if (caughtCount < catchTarget) {
+            caughtCount++;
+            catchScoreEl.textContent = `Terketuk: ${caughtCount} / ${catchTarget}`;
+            catchMsgEl.textContent = catchCompliments[caughtCount - 1];
+            spawnConfetti(10);
+          } else {
+            catchMsgEl.textContent = 'Udah 5/5! Tapi kalau mau ketuk-ketuk lagi buat seru-seruan, bebas 😉';
+          }
+          moveFloatingItem(btn);
+        });
+
+        catchArena.appendChild(btn);
+
+        setInterval(() => {
+          if (document.body.contains(btn)) {
+            moveFloatingItem(btn);
+          }
+        }, 1700 + i * 260);
+      }
+    }
+
+    function moveFloatingItem(el) {
+      const maxX = Math.max(20, catchArena.clientWidth - 60);
+      const maxY = Math.max(46, catchArena.clientHeight - 56);
+      const x = 10 + Math.random() * maxX;
+      const y = 36 + Math.random() * (maxY - 30);
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+    }
+
+    // Sesi 7: Pilih 1 Amplop Misteri
+    const envelopeContents = [
+      '💌 Amplop Pink: "Jujur, nggak gampang bikin sesuatu buat orang yang bikin kepikiran. Semoga yang simpel ini bisa bikin kamu ngerasa dihargai ya.aku buatnya aja excited banget, ini tulus banget dari hati 🥰"',
+      '💜 Amplop Lilac: "Doa kecil dari Ben: semoga tahun ini hatimu lebih enteng, urusanmu dimudahkan, catering lebih banyak orderan🙏, dan nggak ada lagi malam yang bikin kepikiran berat."',
+      '🌷 Amplop Bunga: "Kupon kecil virtual: hari ini aku akan berusaha meluangkan waktu lebih banyak untuk mabar, cerita random, atau sekadar ngobrol santai tanpa mikir harus jaim."'
+    ];
+
+    function openEnvelope(idx, btn) {
+      document.querySelectorAll('.envelope-btn').forEach(b => b.classList.remove('opened'));
+      btn.classList.add('opened');
+      document.getElementById('envelopeMsg').textContent = envelopeContents[idx];
+      spawnConfetti(14);
+    }
+
+    // Sesi 8: Kue & Lilin Angka 20
+    const blowBtn = document.getElementById('blowBtn');
+    const flames = document.querySelectorAll('.flame-item');
+    const wishReveal = document.getElementById('wishReveal');
+    let candleBlown = false;
+
+    blowBtn.addEventListener('click', () => {
+      spawnConfetti(30);
+      if (!candleBlown) {
+        flames.forEach(f => f.classList.add('blown'));
+        candleBlown = true;
+        blowBtn.textContent = 'Nyalakan Lilin 20 Lagi 🕯️';
+        wishReveal.textContent = 'Semoga harapanmu pelan-pelan jadi nyata di usia ke-20 ini, Ayra.';
+      } else {
+        flames.forEach(f => f.classList.remove('blown'));
+        candleBlown = false;
+        blowBtn.textContent = 'Tiup Lilinnya ✨';
+        wishReveal.textContent = 'Lilin 20 nyala lagi—boleh bikin satu harapan lagi!';
+      }
+    });
+
+    // Sesi 9: Kapsul harapan
+    function saveWishCapsule() {
+      const input = document.getElementById('wishInput');
+      const box = document.getElementById('savedCapsule');
+      const text = input.value.trim();
+
+      if (!text) {
+        box.textContent = 'Tulis dulu satu harapan kecilmu di kotak atas ya 🌸';
+        box.classList.add('show');
+        return;
+      }
+
+      box.innerHTML = `<strong>✨ Harapan Ayra Tersimpan:</strong><br>"${escapeHtml(text)}"<br><span style="font-size:0.78rem;opacity:0.85;">Semoga semesta pelan-pelan mengaminkan yang satu ini.</span>`;
+      box.classList.add('show');
+      spawnConfetti(18);
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Sesi 10: Skala salting
+    const saltingReplies = [
+      'Haha, ngelesnya halus banget—tapi nggak apa-apa, yang penting udah dibaca sampai akhir 😉',
+      'Nah kan, ketahuan senyum-senyum sendiri. Aman kok, nggak ada yang lihat 😆🤗😜.',
+      'Cie, mulai salting tipis. Anggap aja pemanasan buat hari spesialmu 💜',
+      'yeaayyy Alhamdulillah berhasil,🥰aku sendiri buat ini aja salting juga🫣'
+    ];
+
+    function pickSalting(idx, btn) {
+      document.querySelectorAll('.salting-btn').forEach(b => b.classList.remove('active-scale'));
+      btn.classList.add('active-scale');
+      document.getElementById('saltingReply').textContent = saltingReplies[idx];
+      if (idx >= 2) spawnConfetti(16);
+    }
+
+    function spawnConfetti(count = 26) {
+      const colors = ['#f472b6', '#c084fc', '#fbcfe8', '#e9d5ff', '#f9a8d4'];
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('span');
+        piece.className = 'confetti-piece';
+        piece.style.left = (12 + Math.random() * 76) + 'vw';
+        piece.style.background = colors[i % colors.length];
+        piece.style.setProperty('--x', ((Math.random() - 0.5) * 140) + 'px');
+        piece.style.setProperty('--dur', (1.8 + Math.random() * 1.2) + 's');
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 3100);
+      }
+    }
+  </script>
+</body>
 </html>
