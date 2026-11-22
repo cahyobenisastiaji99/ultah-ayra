@@ -1505,7 +1505,121 @@
         }
       });
       observer.observe(box, { childList: true });
-    });
+    });    // Kunci tombol "Lanjut" sampai syarat tiap sesi terpenuhi
+    (function setupStepLocks() {
+      const nextBtns = {
+        1: document.querySelector('#page-1 .nav-row .btn-primary'),
+        2: document.querySelector('#page-2 .nav-row .btn-primary'),
+        3: document.querySelector('#page-3 .nav-row .btn-primary'),
+        4: document.querySelector('#page-4 .nav-row .btn-primary'),
+        5: document.querySelector('#page-5 .nav-row .btn-primary'),
+        6: document.querySelector('#page-6 .nav-row .btn-primary'),
+        7: document.querySelector('#page-7 .nav-row .btn-primary'),
+        8: document.querySelector('#page-8 .nav-row .btn-primary')
+      };
+
+      const quizAnswered = { 1: false, 2: false };
+      const riddleRevealed = { 1: false, 2: false };
+      let favSelected = false;
+      let envelopeOpened = false;
+      let capsuleSaved = false;
+
+      // Pantau interaksi yang sudah ada tanpa merusak fungsi lama
+      document.querySelectorAll('#page-3 .quiz-block:nth-of-type(1) .choice-btn').forEach(b => {
+        b.addEventListener('click', () => { quizAnswered[1] = true; refreshLocks(); });
+      });
+      document.querySelectorAll('#page-3 .quiz-block:nth-of-type(2) .choice-btn').forEach(b => {
+        b.addEventListener('click', () => { quizAnswered[2] = true; refreshLocks(); });
+      });
+
+      const r1Btn = document.querySelector('#page-4 .quiz-block:nth-of-type(1) .btn-reveal-ans');
+      const r2Btn = document.querySelector('#page-4 .quiz-block:nth-of-type(2) .btn-reveal-ans');
+      if (r1Btn) r1Btn.addEventListener('click', () => { riddleRevealed[1] = true; refreshLocks(); });
+      if (r2Btn) r2Btn.addEventListener('click', () => { riddleRevealed[2] = true; refreshLocks(); });
+
+      document.querySelectorAll('#page-2 .fav-option').forEach(b => {
+        b.addEventListener('click', () => { favSelected = true; refreshLocks(); });
+      });
+
+      document.querySelectorAll('#page-6 .envelope-btn').forEach(b => {
+        b.addEventListener('click', () => { envelopeOpened = true; refreshLocks(); });
+      });
+
+      if (blowBtn) {
+        blowBtn.addEventListener('click', () => { refreshLocks(); });
+      }
+
+      const saveCapsuleBtn = document.querySelector('#page-8 .btn-primary');
+      if (saveCapsuleBtn) {
+        saveCapsuleBtn.addEventListener('click', () => {
+          const val = document.getElementById('wishInput').value.trim();
+          if (val) {
+            capsuleSaved = true;
+            refreshLocks();
+          }
+        });
+      }
+
+      function checkRequirement(stepIdx) {
+        if (stepIdx === 1) return pickedSet.size >= 1;
+        if (stepIdx === 2) return favSelected;
+        if (stepIdx === 3) return quizAnswered[1] && quizAnswered[2];
+        if (stepIdx === 4) return riddleRevealed[1] && riddleRevealed[2];
+        if (stepIdx === 5) return caughtCount >= catchTarget;
+        if (stepIdx === 6) return envelopeOpened;
+        if (stepIdx === 7) return candleBlown;
+        if (stepIdx === 8) return capsuleSaved;
+        return true;
+      }
+
+      function getHintText(stepIdx) {
+        if (stepIdx === 1) return 'Petik dulu minimal 1 bunga di atas ya sayang 🌷';
+        if (stepIdx === 2) return 'Pilih dulu salah satu bunga favoritmu ya 💐';
+        if (stepIdx === 3) return 'Jawab dulu 2 pertanyaan di atas ya ✨';
+        if (stepIdx === 4) return 'Klik dulu kedua tombol "Lihat Jawaban" di atas ya 💡';
+        if (stepIdx === 5) return 'Ketuk dulu sampai 5 / 5 bunga & hati ya 🌸';
+        if (stepIdx === 6) return 'Buka dulu salah satu amplopnya ya ✉️';
+        if (stepIdx === 7) return 'Tiup dulu lilin angka 20-nya ya 🎂';
+        if (stepIdx === 8) return 'Tulis dulu harapanmu lalu klik "Simpan ke Kapsul Harapan" ya 💜';
+        return 'Selesaikan bagian ini dulu ya.';
+      }
+
+      function refreshLocks() {
+        Object.entries(nextBtns).forEach(([idxStr, btn]) => {
+          if (!btn) return;
+          const idx = Number(idxStr);
+          const unlocked = checkRequirement(idx);
+          btn.style.opacity = unlocked ? '1' : '0.52';
+        });
+      }
+
+      // Cegah klik "Lanjut" saat syarat belum terpenuhi
+      Object.entries(nextBtns).forEach(([idxStr, btn]) => {
+        if (!btn) return;
+        const idx = Number(idxStr);
+        btn.addEventListener('click', (e) => {
+          if (!checkRequirement(idx)) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            const pageEl = document.getElementById('page-' + idx);
+            let notice = pageEl.querySelector('.lock-notice');
+            if (!notice) {
+              notice = document.createElement('div');
+              notice.className = 'quiz-reply lock-notice';
+              notice.style.textAlign = 'center';
+              notice.style.marginTop = '10px';
+              pageEl.querySelector('.nav-row').insertAdjacentElement('beforebegin', notice);
+            }
+            notice.textContent = getHintText(idx);
+          }
+        }, true);
+      });
+
+      // Pantau skor mini-game & petik bunga berkala ringan
+      setInterval(refreshLocks, 400);
+      refreshLocks();
+    })();
+
   </script>
 </body>
 </html>
