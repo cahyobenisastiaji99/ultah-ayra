@@ -796,37 +796,36 @@
     }
 
     @keyframes confettiDrop {
-      0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 1; }
-      100% { transform: translate3d(var(--x, 0px), 100vh, 0) rotate(540deg); opacity: 0; }
-    }/* Efek goyang halus khusus teks/kotak hasil jawaban */
+    /* Efek goyang halus khusus teks/kotak hasil jawaban */
 @keyframes goyangJawaban {
   0%, 100% {
     transform: translateY(0) rotate(0deg);
   }
   25% {
-    transform: translateY(-2px) rotate(-1.2deg);
+    transform: translateY(-2px) rotate(-1.3deg);
   }
   50% {
-    transform: translateY(0) rotate(1.2deg);
+    transform: translateY(0) rotate(1.3deg);
   }
   75% {
-    transform: translateY(-1px) rotate(-0.8deg);
+    transform: translateY(-1px) rotate(-0.9deg);
   }
 }
 
-/* Target kotak bergaris putus-putus / hasil pilihan di bawah */
-[style*="dashed"],
-.result-box,
-.answer-box,
-.feedback-box,
-.note-box {
-  font-size: clamp(1.08rem, 4.2vw, 1.3rem) !important;
+.soft-bubble,
+.quiz-reply {
+  font-size: clamp(1.06rem, 4.1vw, 1.25rem) !important;
   font-weight: 800 !important;
-  line-height: 1.5 !important;
+  line-height: 1.55 !important;
+  animation: goyangJawaban 2.4s ease-in-out infinite !important;
+}
+
+.soft-bubble {
   border-style: solid !important;
   border-width: 2px !important;
-  animation: goyangJawaban 2.5s ease-in-out infinite !important;
+  border-color: rgba(236, 72, 153, 0.55) !important;
 }
+
 
   </style>
 </head>
