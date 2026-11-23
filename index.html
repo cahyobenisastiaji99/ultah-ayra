@@ -1746,15 +1746,52 @@
       });
     }
 
+        let collageTimer = null;
+
+    function buildHeartCollage() {
+      const stage = document.getElementById('heartStage');
+      if (!stage) return;
+      stage.innerHTML = '';
+
+      heartCoords.forEach((pt, idx) => {
+        const card = document.createElement('div');
+        card.className = 'polaroid-card';
+        card.style.setProperty('--hx', pt.x + 'px');
+        card.style.setProperty('--hy', pt.y + 'px');
+        card.style.setProperty('--rot', ((idx % 2 === 0 ? 1 : -1) * (4 + (idx % 6))) + 'deg');
+        card.style.transitionDelay = (idx * 75) + 'ms';
+        card.style.zIndex = idx + 1;
+
+        const img = document.createElement('img');
+        img.src = ayraPhotos[idx % ayraPhotos.length];
+        img.alt = 'Ayra';
+        card.appendChild(img);
+        stage.appendChild(card);
+      });
+    }
+
     function playHeartCollage() {
       const stage = document.getElementById('heartStage');
       if (!stage) return;
+      if (collageTimer) clearTimeout(collageTimer);
+
+      // Matikan delay sebentar biar langsung ngumpul ke tengah dengan mulus
+      const cards = stage.querySelectorAll('.polaroid-card');
+      cards.forEach((card) => {
+        card.style.transitionDelay = '0ms';
+      });
       stage.classList.remove('formed');
-      void stage.offsetWidth; // reset animasi
-      setTimeout(() => {
+
+      // Lalu nyebar lagi satu per satu membentuk love
+      collageTimer = setTimeout(() => {
+        cards.forEach((card, idx) => {
+          card.style.transitionDelay = (idx * 75) + 'ms';
+        });
+        void stage.offsetWidth;
         stage.classList.add('formed');
-      }, 80);
+      }, 360);
     }
+
 
     buildHeartCollage();
 
