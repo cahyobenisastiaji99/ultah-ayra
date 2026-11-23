@@ -822,6 +822,67 @@
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
 }
+    /* Efek Tumpukan Foto Menyebar Jadi Bentuk Love */
+.heart-collage-wrap {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  margin: 14px 0 16px;
+  border-radius: 22px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.92), rgba(243, 232, 255, 0.78));
+  border: 1.5px solid rgba(236, 72, 153, 0.35);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-stage {
+  position: relative;
+  width: 270px;
+  height: 250px;
+}
+
+.polaroid-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 50px;
+  padding: 3px 3px 8px;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35), 0 0 10px rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+  opacity: 0;
+  transition:
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+  will-change: transform, opacity;
+}
+
+.polaroid-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+}
+
+.heart-stage.formed .polaroid-card {
+  opacity: 1;
+  transform: translate(calc(-50% + var(--hx)), calc(-50% + var(--hy))) scale(1) rotate(var(--rot));
+}
+
+.heart-stage.formed {
+  animation: heartFloat 2.8s ease-in-out infinite 1.6s;
+}
+
+@keyframes heartFloat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
   </style>
 </head>
 <body>
@@ -1145,6 +1206,12 @@
         </div>
 
         <div class="salting-reply" id="saltingReply"></div>
+                <div class="heart-collage-wrap">
+          <div class="heart-stage" id="heartStage"></div>
+        </div>
+        <button class="btn-spark" type="button" onclick="playHeartCollage()" style="margin-bottom: 12px;">
+          Susun Ulang Foto Love 💜
+        </button>
 
         <div class="mini-letter">
           Selamat ulang tahun, Ayra. Semoga usia baru ini ngebawa banyak kabar baik dan bikin kamu makin bahagia. Aku di sini terus berusaha pelan-pelan ngambil hatimu dengan tulus.
@@ -1622,6 +1689,80 @@
       setInterval(syncAllLocks, 500);
       syncAllLocks();
     })();
+    // Animasi Tumpukan Foto Membentuk Love
+    const ayraPhotos = [
+      'ayra1.jpg',
+      'ayra2.jpg',
+      'ayra3.jpg',
+      'ayra4.jpg'
+    ];
+
+    // 20 koordinat membentuk siluet hati (love)
+    const heartCoords = [
+      { x: 0, y: -58 },   // lekukan atas tengah
+      { x: -30, y: -82 }, // puncak kiri 1
+      { x: 30, y: -82 },  // puncak kanan 1
+      { x: -64, y: -86 }, // puncak kiri 2
+      { x: 64, y: -86 },  // puncak kanan 2
+      { x: -94, y: -68 }, // lengkung luar kiri atas
+      { x: 94, y: -68 },  // lengkung luar kanan atas
+      { x: -106, y: -36 },// sisi kiri atas
+      { x: 106, y: -36 }, // sisi kanan atas
+      { x: -98, y: 0 },   // sisi kiri tengah
+      { x: 98, y: 0 },    // sisi kanan tengah
+      { x: -78, y: 34 },  // menyempit kiri 1
+      { x: 78, y: 34 },   // menyempit kanan 1
+      { x: -52, y: 64 },  // menyempit kiri 2
+      { x: 52, y: 64 },   // menyempit kanan 2
+      { x: -26, y: 88 },  // mendekati ujung bawah kiri
+      { x: 26, y: 88 },   // mendekati ujung bawah kanan
+      { x: 0, y: 106 },   // ujung lancip bawah
+      { x: -38, y: -22 }, // isian dalam kiri
+      { x: 38, y: -22 }   // isian dalam kanan
+    ];
+
+    function buildHeartCollage() {
+      const stage = document.getElementById('heartStage');
+      if (!stage) return;
+      stage.innerHTML = '';
+
+      heartCoords.forEach((pt, idx) => {
+        const card = document.createElement('div');
+        card.className = 'polaroid-card';
+        card.style.setProperty('--hx', pt.x + 'px');
+        card.style.setProperty('--hy', pt.y + 'px');
+        card.style.setProperty('--rot', ((idx % 2 === 0 ? 1 : -1) * (4 + (idx % 6))) + 'deg');
+        card.style.transitionDelay = (idx * 75) + 'ms';
+        card.style.zIndex = idx + 1;
+
+        const img = document.createElement('img');
+        img.src = ayraPhotos[idx % ayraPhotos.length];
+        img.alt = 'Ayra';
+        card.appendChild(img);
+        stage.appendChild(card);
+      });
+    }
+
+    function playHeartCollage() {
+      const stage = document.getElementById('heartStage');
+      if (!stage) return;
+      stage.classList.remove('formed');
+      void stage.offsetWidth; // reset animasi
+      setTimeout(() => {
+        stage.classList.add('formed');
+      }, 80);
+    }
+
+    buildHeartCollage();
+
+    // Otomatis jalan saat masuk Sesi 10 (page-9)
+    const origGoToPage = goToPage;
+    goToPage = function(index) {
+      origGoToPage(index);
+      if (index === 9) {
+        playHeartCollage();
+      }
+    };
 
   </script>
 </body>
