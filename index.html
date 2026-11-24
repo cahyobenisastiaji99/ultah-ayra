@@ -919,17 +919,20 @@
       background: #c084fc;
       color: #160926;
     }
-    .official-btn-no {
-      background: rgba(255, 255, 255, 0.14);
-      color: #fff;
+        .official-btn-no {
+      background: rgba(139, 92, 246, 0.14);
+      color: #4c1d95;
+      border: 1px solid rgba(139, 92, 246, 0.32);
     }
     .official-reply {
       margin-top: 10px;
       font-size: 0.9rem;
       line-height: 1.5;
-      color: #f3e8ff;
+      color: #3b0764;
+      font-weight: 500;
       min-height: 20px;
     }
+
 
   </style>
 </head>
@@ -1121,7 +1124,7 @@
         </div>
 
         <div class="quiz-block">
-          <div class="quiz-q">2. Bedanya ulang tahun kamu sama bunga pink-ungu apa?</div>
+          <div class="quiz-q">2. Bedanya kamu sama bunga pink-ungu yang kamu liat dari tadi disini apa?</div>
           <button class="btn-reveal-ans" type="button" onclick="revealRiddle(2)">Lihat Jawaban 2 💡</button>
           <div class="quiz-reply" id="riddleReply2"></div>
         </div>
@@ -1437,7 +1440,7 @@
       if (qNum === 1) {
         document.getElementById('quizReply1').textContent = choiceIdx === 0
           ? 'Noted! Kalau lagi butuh ruang tenang, aku siap nemenin pelan-pelan tanpa ganggu.'
-          : 'Noted! Lain kali kalau lagi capek, tinggal kode aja—siap dengerin atau bawain yang manis/pedes.';
+          : 'Noted! aku siap jadi pendengar yang baik🤗,atau bawain yang manis/pedes.';
       } else {
         document.getElementById('quizReply2').textContent = choiceIdx === 0
           ? 'Pas banget, versi digitalnya udah ada di sini—semoga nyampe ke hatimu ya.'
@@ -1452,7 +1455,7 @@
           'Bunga yang tumbuh di hati setiap kali inget senyum kamu. Eaaa tipis-tipis dulu 🌸';
       } else {
         document.getElementById('riddleReply2').textContent =
-          'Kalau bunga pink-ungu bikin halaman ini kelihatan manis, ulang tahun kamu bikin hari ini jadi spesial buat aku 💜';
+          'Kalau bunga pink-ungu bikin halaman ini kelihatan manis,kalau kamu manisnya tuh kayak rasa sayangku ke kamu, yups. gak abis abiss😘💜';
       }
     }
 
