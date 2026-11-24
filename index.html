@@ -883,6 +883,54 @@
   50% { transform: scale(1.04); }
 }
 
+        .official-box {
+      margin: 14px 0 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      text-align: left;
+    }
+    .official-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .official-text {
+      font-size: 0.94rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      opacity: 0.95;
+    }
+    .official-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .official-btn {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+    .official-btn-yes {
+      background: #c084fc;
+      color: #160926;
+    }
+    .official-btn-no {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+    }
+    .official-reply {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #f3e8ff;
+      min-height: 20px;
+    }
+
   </style>
 </head>
 <body>
@@ -1212,6 +1260,22 @@
         <button class="btn-spark" type="button" onclick="playHeartCollage()" style="margin-bottom: 12px;">
           Susun Ulang Foto Love 💜
         </button>
+            <div class="official-box" id="officialBox">
+      <div class="official-title">Katanya Jangan Salting Mulu Tapi Nggak Jadian... 💜</div>
+      <p class="official-text">
+        Di game udah jadi lovers, orang-orang juga udah banyak yang tahu, eh pas ditanya masih perlu nembak nggak malah bilang jangan salting mulu tapi nggak jadian sambil ketawa-ketawa.
+        Yaudah deh, biar makin sah—sekarang kamu mau nggak jadi kekasihku?aku sayang kamu,ingin kamu jadi pacarku☺️?
+      </p>
+      <div class="official-actions">
+        <button class="official-btn official-btn-yes" type="button" onclick="jawabNembak('yes')">
+          Sah dong! 💜
+        </button>
+        <button class="official-btn official-btn-no" type="button" onclick="jawabNembak('no')">
+          Pikirin dulu ah...
+        </button>
+      </div>
+      <div class="official-reply" id="officialReply"></div>
+    </div>
 
         <div class="mini-letter">
           Selamat ulang tahun, Ayra. Semoga usia baru ini ngebawa banyak kabar baik dan bikin kamu makin bahagia. Aku di sini terus berusaha pelan-pelan ngambil hatimu dengan tulus.
@@ -1803,6 +1867,16 @@
         playHeartCollage();
       }
     };
+    function jawabNembak(pilihan) {
+      const replyEl = document.getElementById('officialReply');
+      if (!replyEl) return;
+      if (pilihan === 'yes') {
+        replyEl.textContent = 'Nah gitu dong, sah ya! Nggak boleh salting sendiri lagi—lanjut baca surat & lihat tumpukan foto love di bawah ya 🥺💜';
+        if (typeof spawnConfetti === 'function') spawnConfetti();
+      } else {
+        replyEl.textContent = 'Eits, nggak ada tombol "Skip" kayak di chat tadi wkwk. Coba pencet tombol "Sah dong!" di sebelahnya 😆';
+      }
+    }
 
   </script>
 </body>
